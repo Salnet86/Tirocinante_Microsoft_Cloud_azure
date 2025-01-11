@@ -1,0 +1,113 @@
+# 1. Verifica della versione di Windows
+winver # Mostra la versione di Windows in uso.
+
+# 2. Verifica gli aggiornamenti di Windows
+ms-settings:windowsupdate # Apre la finestra degli aggiornamenti di Windows.
+
+# 3. Visualizza gli utenti del sistema
+net user # Mostra gli utenti configurati nel sistema.
+
+# 4. Aggiungi un nuovo utente
+net user nome_utente /add # Crea un nuovo utente nel sistema.
+
+# 5. Aggiungi un utente a un gruppo
+net localgroup nome_gruppo nome_utente /add # Aggiunge un utente a un gruppo locale.
+
+# 6. Disabilita un account utente
+net user nome_utente /active:no # Disabilita l'account utente specificato.
+
+# 7. Abilita un account utente
+net user nome_utente /active:yes # Abilita l'account utente specificato.
+
+# 8. Modifica la password di un utente
+net user nome_utente nuova_password # Cambia la password dell'utente specificato.
+
+# 9. Avvia Windows Defender
+start ms-settings:defender # Apre la finestra di Windows Defender.
+
+# 10. Esegui una scansione completa con Windows Defender
+MpCmdRun.exe -Scan -ScanType 2 # Esegue una scansione completa del sistema tramite Windows Defender.
+
+# 11. Aggiorna Windows Defender
+MpCmdRun.exe -SignatureUpdate # Aggiorna le firme di Windows Defender.
+
+# 12. Visualizza lo stato del firewall
+netsh advfirewall show allprofiles # Mostra lo stato del firewall di Windows per tutti i profili.
+
+# 13. Abilita il firewall
+netsh advfirewall set allprofiles state on # Abilita il firewall di Windows su tutti i profili.
+
+# 14. Disabilita il firewall
+netsh advfirewall set allprofiles state off # Disabilita il firewall di Windows su tutti i profili.
+
+# 15. Aggiungi una regola al firewall
+netsh advfirewall firewall add rule name="Nome_Regola" dir=in action=allow protocol=TCP localport=80 # Aggiunge una regola per consentire il traffico sulla porta 80 tramite il firewall.
+
+# 16. Abilita BitLocker su un'unità
+manage-bde -on C: -RecoveryPassword # Abilita BitLocker sulla partizione C: e genera una password di recupero.
+
+# 17. Disabilita BitLocker su un'unità
+manage-bde -off C: # Disabilita BitLocker sulla partizione C:.
+
+# 18. Abilita il registro degli eventi di sicurezza
+auditpol /set /category:"Logon/Logoff" /success:enable /failure:enable # Abilita il monitoraggio degli accessi e dei logoff nel registro eventi di sicurezza.
+
+# 19. Visualizza le politiche di sicurezza
+secpol.msc # Apre la console delle politiche di sicurezza locali.
+
+# 20. Verifica gli utenti con privilegi di amministratore
+net localgroup administrators # Mostra gli utenti membri del gruppo amministratori locali.
+
+# 21. Visualizza le connessioni di rete attive
+netstat -an # Mostra tutte le connessioni di rete attive e le porte in ascolto.
+
+# 22. Blocca una porta di rete
+netsh advfirewall firewall add rule name="Block Port 8080" protocol=TCP dir=in localport=8080 action=block # Aggiunge una regola per bloccare il traffico in entrata sulla porta 8080.
+
+# 23. Controlla le connessioni aperte e i servizi in ascolto
+netstat -ano # Mostra le connessioni attive, i processi in ascolto e i relativi PID.
+
+# 24. Esegui una scansione SFC (System File Checker)
+sfc /scannow # Verifica l'integrità dei file di sistema e ripara quelli corrotti.
+
+# 25. Esegui un controllo DISM (Deployment Imaging Service and Management Tool)
+dism /online /cleanup-image /restorehealth # Ripara l'immagine di Windows.
+
+# 26. Imposta la protezione del sistema (Ripristino configurazione di sistema)
+rstrui.exe # Apre lo strumento di ripristino di sistema.
+
+# 27. Crea un punto di ripristino
+checks /scannow # Crea un punto di ripristino del sistema.
+
+# 28. Visualizza le cartelle condivise
+net share # Mostra le condivisioni di file attive nel sistema.
+
+# 29. Rimuovi una cartella condivisa
+net share nome_cartella /delete # Rimuove una cartella condivisa specificata.
+
+# 30. Visualizza le attività in esecuzione (Task Manager)
+taskmgr # Apre il Task Manager per visualizzare e gestire i processi in esecuzione.
+
+# 31. Visualizza i processi in esecuzione tramite il comando Tasklist
+tasklist # Mostra tutti i processi attivi nel sistema.
+
+# 32. Termina un processo specifico
+taskkill /IM nome_process.exe /F # Termina un processo specificato dal nome.
+
+# 33. Disabilitare UAC (Controllo account utente)
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0 /f # Disabilita il controllo account utente (UAC).
+
+# 34. Abilitare UAC
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 1 /f # Abilita il controllo account utente (UAC).
+
+# 35. Visualizza i servizi in esecuzione
+services.msc # Apre la console dei servizi per gestire i servizi di sistema.
+
+# 36. Disabilita un servizio
+sc config nome_servizio start= disabled # Disabilita un servizio specificato.
+
+# 37. Abilita la protezione da attacchi di tipo Ransomware (Controlled Folder Access)
+Set-MpPreference -EnableControlledFolderAccess Enabled # Abilita la protezione delle cartelle da ransomware.
+
+# 38. Disabilita la protezione da attacchi di tipo Ransomware (Controlled Folder Access)
+Set-MpPreference -EnableControlledFolderAccess Disabled # Disabilita la protezione delle cartelle da ransomware.
