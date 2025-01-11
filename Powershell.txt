@@ -1,0 +1,78 @@
+# 1. Gestione dell'Account e Autenticazione
+Connect-AzAccount  # Esegui il login al tuo account Azure
+Set-AzContext -SubscriptionId "ID-Abbonamento"  # Seleziona un abbonamento specifico
+Get-AzSubscription  # Elenca tutti gli abbonamenti disponibili
+Get-AzContext  # Ottieni il contesto dell'abbonamento corrente
+
+# 2. Gruppi di Risorse
+New-AzResourceGroup -Name "NomeGruppoRisorse" -Location "EastUS"  # Crea un nuovo gruppo di risorse
+Get-AzResourceGroup -Name "NomeGruppoRisorse"  # Ottieni informazioni su un gruppo di risorse
+Remove-AzResourceGroup -Name "NomeGruppoRisorse" -Force  # Elimina un gruppo di risorse
+
+# 3. Macchine Virtuali (VM)
+New-AzVM -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -VMName "NomeVM" -ImageName "Win2019Datacenter" -Size "Standard_DS1_v2"  # Crea una macchina virtuale
+Get-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM"  # Ottieni informazioni su una macchina virtuale
+Start-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM"  # Avvia una macchina virtuale
+Stop-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM" -Force  # Ferma una macchina virtuale
+Remove-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM" -Force  # Elimina una macchina virtuale
+
+# 4. Reti Virtuali (VNet)
+New-AzVirtualNetwork -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeVNet" -AddressPrefix "10.0.0.0/16"  # Crea una rete virtuale
+Get-AzVirtualNetwork -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVNet"  # Ottieni informazioni su una rete virtuale
+Add-AzVirtualNetworkSubnetConfig -Name "NomeSottorete" -VirtualNetwork $vnet -AddressPrefix "10.0.1.0/24"  # Aggiungi una sottorete a una rete virtuale
+Set-AzVirtualNetwork -VirtualNetwork $vnet  # Modifica una rete virtuale esistente
+Remove-AzVirtualNetwork -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVNet" -Force  # Elimina una rete virtuale
+
+# 5. Interfacce di Rete (NIC)
+New-AzNetworkInterface -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeNIC" -SubnetId $subnet.Id  # Crea una nuova NIC
+Get-AzNetworkInterface -ResourceGroupName "NomeGruppoRisorse" -Name "NomeNIC"  # Ottieni informazioni su una NIC esistente
+Set-AzNetworkInterface -NetworkInterface $nic  # Modifica una NIC esistente
+Remove-AzNetworkInterface -ResourceGroupName "NomeGruppoRisorse" -Name "NomeNIC" -Force  # Elimina una NIC
+
+# 6. Indirizzi IP Pubblici
+New-AzPublicIpAddress -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeIP" -AllocationMethod Dynamic  # Crea un indirizzo IP pubblico
+Get-AzPublicIpAddress -ResourceGroupName "NomeGruppoRisorse" -Name "NomeIP"  # Ottieni informazioni su un indirizzo IP pubblico
+Remove-AzPublicIpAddress -ResourceGroupName "NomeGruppoRisorse" -Name "NomeIP" -Force  # Elimina un indirizzo IP pubblico
+
+# 7. Dischi
+New-AzDisk -ResourceGroupName "NomeGruppoRisorse" -DiskName "NomeDisco" -DiskSizeGB 128 -AccountType "Standard_LRS" -Location "EastUS"  # Crea un disco gestito
+Get-AzDisk -ResourceGroupName "NomeGruppoRisorse" -DiskName "NomeDisco"  # Ottieni informazioni su un disco
+Set-AzDisk -Disk $disk  # Modifica un disco esistente
+Remove-AzDisk -ResourceGroupName "NomeGruppoRisorse" -DiskName "NomeDisco" -Force  # Elimina un disco
+
+# 8. Gruppi di Sicurezza di Rete (NSG)
+New-AzNetworkSecurityGroup -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeNSG"  # Crea un nuovo gruppo di sicurezza di rete
+Get-AzNetworkSecurityGroup -ResourceGroupName "NomeGruppoRisorse" -Name "NomeNSG"  # Ottieni informazioni su un NSG
+Add-AzNetworkSecurityRuleConfig -Name "AllowRDP" -Protocol "Tcp" -Direction "Inbound" -Priority 100 -SourceAddressPrefix "*" -DestinationPortRange 3389 -Access "Allow"  # Aggiungi una regola di sicurezza
+Set-AzNetworkSecurityGroup -NetworkSecurityGroup $nsg  # Applica le modifiche al gruppo di sicurezza
+Remove-AzNetworkSecurityGroup -ResourceGroupName "NomeGruppoRisorse" -Name "NomeNSG" -Force  # Elimina un NSG
+
+# 9. Load Balancer
+New-AzLoadBalancer -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeLB"  # Crea un bilanciatore del carico
+Get-AzLoadBalancer -ResourceGroupName "NomeGruppoRisorse" -Name "NomeLB"  # Ottieni informazioni su un bilanciatore del carico
+Remove-AzLoadBalancer -ResourceGroupName "NomeGruppoRisorse" -Name "NomeLB" -Force  # Elimina un bilanciatore del carico
+
+# 10. Azure Active Directory (Azure AD)
+New-AzADUser -UserPrincipalName "utente@dominio.com" -DisplayName "Nome Utente" -Password "PasswordSicura123!"  # Crea un nuovo utente in Azure AD
+Get-AzADUser -UserPrincipalName "utente@dominio.com"  # Ottieni informazioni su un utente Azure AD
+Set-AzADUser -UserPrincipalName "utente@dominio.com" -DisplayName "Nuovo Nome"  # Modifica un utente Azure AD
+New-AzADGroup -DisplayName "Nome Gruppo" -MailNickname "Gruppo1"  # Crea un gruppo in Azure AD
+Add-AzADGroupMember -GroupObjectId $group.Id -MemberObjectId $user.Id  # Aggiungi un membro a un gruppo in Azure AD
+Remove-AzADGroupMember -GroupObjectId $group.Id -MemberObjectId $user.Id  # Rimuovi un membro da un gruppo di Azure AD
+
+# 11. Key Vault
+New-AzKeyVault -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -VaultName "NomeVault"  # Crea un Key Vault
+Get-AzKeyVault -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVault"  # Ottieni informazioni su un Key Vault
+Set-AzKeyVaultSecret -VaultName "NomeVault" -Name "NomeSegreto" -SecretValue "Segreto123"  # Aggiungi un segreto a un Key Vault
+Get-AzKeyVaultSecret -VaultName "NomeVault" -Name "NomeSegreto"  # Ottieni un segreto da un Key Vault
+Remove-AzKeyVaultSecret -VaultName "NomeVault" -Name "NomeSegreto"  # Elimina un segreto da un Key Vault
+
+# 12. Monitoraggio e Log
+Get-AzActivityLog -ResourceGroupName "NomeGruppoRisorse"  # Ottieni i log delle attività di Azure
+New-AzMetricAlertRule -ResourceGroupName "NomeGruppoRisorse" -Name "AlertCPU" -TargetResourceId $vm.Id -Criteria "Avg(CPUUtilization) > 80" -Threshold 80  # Crea una regola di allerta per le metriche
+Get-AzMetric -ResourceId $resourceId  # Ottieni le metriche di una risorsa
+
+# 13. Kubernetes e Container
+New-AzAksCluster -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeAKS" -NodeCount 3 -KubernetesVersion "1.20.7" -GenerateSshKey  # Crea un cluster AKS
+Get-AzAksCluster -ResourceGroupName "NomeGruppoRisorse" -Name "NomeAKS"  # Ottieni informazioni su un cluster AKS
+Remove-AzAksCluster -ResourceGroupName "NomeGruppoRisorse" -Name "NomeAKS" -Force  # Elimina un cluster AKS
