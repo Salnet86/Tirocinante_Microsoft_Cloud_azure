@@ -1,0 +1,7 @@
+Get-AzDisk # Ottieni informazioni sui dischi di una VM
+New-AzDisk # Crea un nuovo disco di macchina virtuale
+Set-AzDisk # Modifica un disco esistente
+Remove-AzDisk # Rimuove un disco di macchina virtuale
+Attach-AzDisk # Collega un disco a una macchina virtuale
+Detach-AzDisk # Scollega un disco da una macchina virtuale
+

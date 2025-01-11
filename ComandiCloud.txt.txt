@@ -1,0 +1,165 @@
+# Autenticazione e Gestione Account
+Connect-AzAccount # Autenticarsi al tuo account Azure
+Get-AzContext # Visualizza il contesto corrente (abbonamento e credenziali attive)
+Set-AzContext # Imposta il contesto di abbonamento o tenant per la sessione corrente
+Get-AzAccount # Ottieni informazioni sull'account
+Disconnect-AzAccount # Disconnessione dal tuo account Azure
+
+
+# Gestione degli Abbonamenti
+Get-AzSubscription # Elenco di tutti gli abbonamenti Azure associati all'account
+Set-AzSubscription # Seleziona l'abbonamento da utilizzare
+Select-AzSubscription # Seleziona un abbonamento per la sessione corrente
+New-AzSubscription # Crea un nuovo abbonamento Azure
+Remove-AzSubscription # Elimina un abbonamento (occorre attenzione)
+
+
+# Gestione dei Gruppi di Risorse
+New-AzResourceGroup # Crea un nuovo gruppo di risorse
+Get-AzResourceGroup # Ottieni informazioni sui gruppi di risorse esistenti
+Set-AzResourceGroup # Modifica un gruppo di risorse esistente
+Remove-AzResourceGroup # Rimuove un gruppo di risorse
+Export-AzResourceGroup # Esporta le informazioni di un gruppo di risorse
+
+
+# Gestione delle Macchine Virtuali (VM)
+New-AzVM # Crea una nuova macchina virtuale
+Get-AzVM # Ottieni informazioni sulle VM esistenti
+Set-AzVM # Modifica una macchina virtuale
+Start-AzVM # Avvia una macchina virtuale
+Stop-AzVM # Arresta una macchina virtuale
+Restart-AzVM # Riavvia una macchina virtuale
+Remove-AzVM # Rimuove una macchina virtuale
+New-AzVMConfig # Crea una configurazione di macchina virtuale
+Add-AzVMNetworkInterface # Aggiungi un'interfaccia di rete alla VM
+
+
+# Gestione delle Reti Virtuali (VNet)
+New-AzVirtualNetwork # Crea una nuova rete virtuale
+Get-AzVirtualNetwork # Ottieni informazioni sulle reti virtuali
+Set-AzVirtualNetwork # Modifica una rete virtuale esistente
+Remove-AzVirtualNetwork # Elimina una rete virtuale
+New-AzVirtualNetworkSubnetConfig # Crea una nuova configurazione di subnet
+Get-AzVirtualNetworkSubnetConfig # Ottieni informazioni sulle subnet
+Set-AzVirtualNetworkSubnetConfig # Modifica una subnet esistente
+Remove-AzVirtualNetworkSubnetConfig # Rimuove una subnet
+
+
+# Gestione delle Interfacce di Rete
+New-AzNetworkInterface # Crea una nuova interfaccia di rete
+Get-AzNetworkInterface # Ottieni informazioni sulle interfacce di rete esistenti
+Set-AzNetworkInterface # Modifica un'interfaccia di rete
+Remove-AzNetworkInterface # Rimuove un'interfaccia di rete
+
+
+# Gestione degli Storage Account
+New-AzStorageAccount # Crea un nuovo account di archiviazione
+Get-AzStorageAccount # Ottieni informazioni sugli account di archiviazione esistenti
+Set-AzStorageAccount # Modifica un account di archiviazione
+Remove-AzStorageAccount # Elimina un account di archiviazione
+
+
+# Gestione dei Blob (Contenitori di Archiviazione)
+New-AzStorageContainer # Crea un nuovo contenitore di blob
+Get-AzStorageContainer # Ottieni informazioni sui contenitori di blob
+Set-AzStorageContainer # Modifica un contenitore di blob
+Remove-AzStorageContainer # Rimuove un contenitore di blob
+Get-AzStorageBlob # Ottieni informazioni su blob
+Set-AzStorageBlob # Modifica un blob
+Remove-AzStorageBlob # Rimuove un blob
+
+
+# Gestione dei Dischi di Archiviazione
+New-AzDisk # Crea un nuovo disco di archiviazione
+Get-AzDisk # Ottieni informazioni sui dischi di archiviazione
+Set-AzDisk # Modifica un disco di archiviazione
+Remove-AzDisk # Rimuove un disco di archiviazione
+
+
+# Gestione delle Identità di Azure (Azure AD)
+New-AzADUser # Crea un nuovo utente in Azure AD
+Get-AzADUser # Ottieni informazioni sugli utenti di Azure AD
+Set-AzADUser # Modifica un utente di Azure AD
+Remove-AzADUser # Elimina un utente di Azure AD
+New-AzADGroup # Crea un nuovo gruppo in Azure AD
+Get-AzADGroup # Ottieni informazioni sui gruppi di Azure AD
+Set-AzADGroup # Modifica un gruppo di Azure AD
+Remove-AzADGroup # Rimuove un gruppo di Azure AD
+New-AzADServicePrincipal # Crea un nuovo service principal
+Get-AzADServicePrincipal # Ottieni informazioni su un service principal
+Set-AzADServicePrincipal # Modifica un service principal
+Remove-AzADServicePrincipal # Rimuove un service principal
+
+
+# Gestione dei Ruoli e delle Assegnazioni di Ruolo (RBAC)
+New-AzRoleAssignment # Assegna un ruolo a un utente, gruppo o service principal
+Get-AzRoleAssignment # Ottieni le assegnazioni di ruolo esistenti
+Set-AzRoleAssignment # Modifica un'assegnazione di ruolo
+Remove-AzRoleAssignment # Rimuove un'assegnazione di ruolo
+
+
+# Gestione delle Funzioni di Azure (Azure Functions)
+New-AzFunctionApp # Crea una nuova Azure Function App
+Get-AzFunctionApp # Ottieni informazioni sulle Azure Function App
+Set-AzFunctionApp # Modifica una Azure Function App
+Remove-AzFunctionApp # Rimuove una Azure Function App
+
+
+# Gestione dei Log e Monitoraggio
+Get-AzLog # Ottieni i log di attività per le risorse
+Get-AzActivityLog # Ottieni il log delle attività di Azure
+Get-AzMetric # Ottieni le metriche di monitoraggio per le risorse
+Set-AzDiagnosticSetting # Imposta la diagnostica per una risorsa
+
+
+# Gestione del Networking (VPN, NSG, etc.)
+New-AzVpnGateway # Crea un nuovo gateway VPN
+Get-AzVpnGateway # Ottieni informazioni sui gateway VPN esistenti
+Set-AzVpnGateway # Modifica un gateway VPN
+Remove-AzVpnGateway # Rimuove un gateway VPN
+New-AzNetworkSecurityGroup # Crea un nuovo Network Security Group (NSG)
+Get-AzNetworkSecurityGroup # Ottieni informazioni su NSG esistenti
+Set-AzNetworkSecurityGroup # Modifica un Network Security Group
+Remove-AzNetworkSecurityGroup # Rimuove un Network Security Group
+
+
+# Gestione dei Carichi di Lavoro e App (App Service)
+New-AzWebApp # Crea una nuova app web in Azure App Service
+Get-AzWebApp # Ottieni informazioni sulle app web
+Set-AzWebApp # Modifica una app web
+Remove-AzWebApp # Rimuove una app web
+
+
+# Gestione di Kubernetes (Azure Kubernetes Service - AKS)
+New-AzAksCluster # Crea un nuovo cluster AKS
+Get-AzAksCluster # Ottieni informazioni su cluster AKS esistenti
+Set-AzAksCluster # Modifica un cluster AKS
+Remove-AzAksCluster # Rimuove un cluster AKS
+
+
+# Gestione delle Risorse di Azure (General)
+New-AzResource # Crea una risorsa generica
+Get-AzResource # Ottieni informazioni su risorse generiche
+Set-AzResource # Modifica una risorsa generica
+Remove-AzResource # Rimuove una risorsa generica
+
+
+# Gestione delle Immagini (VM Images)
+New-AzImage # Crea una nuova immagine da una VM
+Get-AzImage # Ottieni informazioni sulle immagini VM esistenti
+Set-AzImage # Modifica un'immagine VM
+Remove-AzImage # Rimuove un'immagine VM
+
+
+# Gestione delle Reti Privati Virtuali (VNet Peering)
+New-AzVirtualNetworkPeering # Crea un nuovo peering di reti virtuali
+Get-AzVirtualNetworkPeering # Ottieni informazioni su peering di reti virtuali
+Remove-AzVirtualNetworkPeering # Rimuove un peering di reti virtuali
+
+
+# Gestione dei Backup (Recovery Services)
+New-AzRecoveryServicesVault # Crea una nuova vault di servizi di recupero
+Get-AzRecoveryServicesVault # Ottieni informazioni sulle vault di servizi di recupero
+Set-AzRecoveryServicesVault # Modifica una vault di servizi di recupero
+Remove-AzRecoveryServicesVault # Rimuove una vault di servizi di recupero
+

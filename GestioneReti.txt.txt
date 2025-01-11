@@ -1,0 +1,4 @@
+Get-AzNetworkInterface # Ottieni informazioni sulle interfacce di rete
+New-AzNetworkInterface # Crea una nuova interfaccia di rete per la VM
+Set-AzNetworkInterface # Modifica un'interfaccia di rete
+Remove-AzNetworkInterface # Rimuove un'interfaccia di rete

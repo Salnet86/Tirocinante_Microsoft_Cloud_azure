@@ -1,0 +1,79 @@
+# Gestione degli Utenti in Azure AD
+New-AzADUser # Crea un nuovo utente in Azure AD
+Get-AzADUser # Ottieni informazioni sugli utenti di Azure AD
+Set-AzADUser # Modifica un utente di Azure AD
+Remove-AzADUser # Elimina un utente di Azure AD
+Set-AzADUserPassword # Modifica la password di un utente di Azure AD
+Get-AzADUserOwnedObject # Ottieni gli oggetti posseduti da un utente di Azure AD
+Get-AzADUserMembership # Ottieni i gruppi di cui un utente è membro
+
+# Gestione dei Gruppi in Azure AD
+New-AzADGroup # Crea un nuovo gruppo in Azure AD
+Get-AzADGroup # Ottieni informazioni sui gruppi di Azure AD
+Set-AzADGroup # Modifica un gruppo di Azure AD
+Remove-AzADGroup # Rimuove un gruppo di Azure AD
+Add-AzADGroupMember # Aggiungi un membro a un gruppo di Azure AD
+Remove-AzADGroupMember # Rimuove un membro da un gruppo di Azure AD
+Get-AzADGroupMember # Ottieni i membri di un gruppo di Azure AD
+
+# Gestione dei Service Principal in Azure AD
+New-AzADServicePrincipal # Crea un nuovo service principal in Azure AD
+Get-AzADServicePrincipal # Ottieni informazioni su un service principal
+Set-AzADServicePrincipal # Modifica un service principal
+Remove-AzADServicePrincipal # Rimuove un service principal
+Get-AzADServicePrincipalCredential # Ottieni le credenziali di un service principal
+New-AzADServicePrincipalCredential # Aggiungi credenziali a un service principal
+Remove-AzADServicePrincipalCredential # Rimuove credenziali da un service principal
+
+# Gestione delle Applicazioni in Azure AD
+New-AzADApplication # Crea una nuova applicazione in Azure AD
+Get-AzADApplication # Ottieni informazioni sulle applicazioni in Azure AD
+Set-AzADApplication # Modifica un'applicazione in Azure AD
+Remove-AzADApplication # Rimuove un'applicazione da Azure AD
+
+# Gestione dei Ruoli in Azure AD
+Get-AzADRole # Ottieni i ruoli disponibili in Azure AD
+Get-AzADRoleAssignment # Ottieni le assegnazioni di ruoli in Azure AD
+New-AzADRoleAssignment # Assegna un ruolo a un utente, gruppo o service principal
+Remove-AzADRoleAssignment # Rimuove un'assegnazione di ruolo
+Set-AzADRoleAssignment # Modifica un'assegnazione di ruolo
+
+# Gestione delle Licenze in Azure AD
+Get-AzADUserLicense # Ottieni le licenze di un utente
+Set-AzADUserLicense # Assegna o rimuove una licenza a un utente
+Add-AzADUserLicense # Aggiungi una licenza a un utente
+Remove-AzADUserLicense # Rimuove una licenza da un utente
+
+# Gestione dei Contatti in Azure AD
+New-AzADContact # Crea un nuovo contatto in Azure AD
+Get-AzADContact # Ottieni informazioni sui contatti in Azure AD
+Set-AzADContact # Modifica un contatto in Azure AD
+Remove-AzADContact # Rimuove un contatto in Azure AD
+
+# Gestione dei Directory Settings (Impostazioni di Directory)
+Get-AzADDirectorySetting # Ottieni le impostazioni di directory
+Set-AzADDirectorySetting # Modifica le impostazioni di directory
+
+# Gestione delle Unità Organizzative in Azure AD (se supportato)
+New-AzADOrganizationalUnit # Crea una nuova Unità Organizzativa
+Get-AzADOrganizationalUnit # Ottieni informazioni sulle Unità Organizzative
+Set-AzADOrganizationalUnit # Modifica una Unità Organizzativa
+Remove-AzADOrganizationalUnit # Rimuove una Unità Organizzativa
+
+# Gestione dei Claim e delle App Registrate
+Get-AzADAppRole # Ottieni i ruoli di un'applicazione
+New-AzADAppRole # Crea un nuovo ruolo di applicazione
+Set-AzADAppRole # Modifica un ruolo di applicazione
+Remove-AzADAppRole # Rimuove un ruolo di applicazione
+
+# Gestione dell'Autenticazione Multi-Fattore (MFA)
+Get-AzADUserMFA # Ottieni lo stato MFA di un utente
+Set-AzADUserMFA # Modifica lo stato MFA di un utente
+Enable-AzADUserMFA # Abilita MFA per un utente
+Disable-AzADUserMFA # Disabilita MFA per un utente
+
+# Gestione degli Accessi Condizionali
+Get-AzADConditionalAccessPolicy # Ottieni le politiche di accesso condizionale
+New-AzADConditionalAccessPolicy # Crea una nuova politica di accesso condizionale
+Set-AzADConditionalAccessPolicy # Modifica una politica di accesso condizionale
+Remove-AzADConditionalAccessPolicy # Rimuove una politica di accesso condizionale

@@ -1,0 +1,4 @@
+New-AzSnapshot # Crea uno snapshot di un disco
+Get-AzSnapshot # Ottieni informazioni sugli snapshot esistenti
+Remove-AzSnapshot # Rimuove uno snapshot
+

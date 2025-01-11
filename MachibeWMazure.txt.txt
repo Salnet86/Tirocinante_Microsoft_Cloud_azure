@@ -1,0 +1,30 @@
+# Gestione delle Macchine Virtuali (VM)
+New-AzVM # Crea una nuova macchina virtuale
+Get-AzVM # Ottieni informazioni su tutte le macchine virtuali
+Set-AzVM # Modifica una macchina virtuale esistente
+Remove-AzVM # Rimuove una macchina virtuale
+Start-AzVM # Avvia una macchina virtuale
+Stop-AzVM # Arresta una macchina virtuale
+Restart-AzVM # Riavvia una macchina virtuale
+Get-AzVMSize # Ottieni le dimensioni disponibili delle macchine virtuali
+Get-AzVMOperatingSystem # Ottieni informazioni sul sistema operativo di una VM
+New-AzVMConfig # Crea una configurazione di macchina virtuale (senza creare la VM)
+Set-AzVMOperatingSystem # Modifica il sistema operativo di una VM
+Set-AzVMSize # Modifica le dimensioni della VM (es. CPU, RAM)
+Add-AzVMNetworkInterface # Aggiungi una nuova interfaccia di rete a una macchina virtuale
+Remove-AzVMNetworkInterface # Rimuove un'interfaccia di rete da una macchina virtuale
+Get-AzVMExtension # Ottieni informazioni sulle estensioni installate su una VM
+Set-AzVMExtension # Installa o modifica un'estensione di una macchina virtuale
+Remove-AzVMExtension # Rimuove un'estensione da una macchina virtuale
+New-AzVMImage # Crea un'immagine di una macchina virtuale
+Get-AzVMImage # Ottieni informazioni sulle immagini delle VM disponibili
+Remove-AzVMImage # Rimuove un'immagine di macchina virtuale
+ConvertTo-AzVM # Converte una macchina virtuale da un formato immagine
+New-AzAvailabilitySet # Crea un set di disponibilità per distribuire VM
+Get-AzAvailabilitySet # Ottieni informazioni su set di disponibilità esistenti
+Set-AzAvailabilitySet # Modifica un set di disponibilità esistente
+Remove-AzAvailabilitySet # Rimuove un set di disponibilità
+Get-AzVMSS # Ottieni informazioni sulle scale set di VM
+New-AzVMSS # Crea un nuovo scale set di VM
+Set-AzVMSS # Modifica uno scale set di VM esistente
+Remove-AzVMSS # Rimuove uno scale set di VM
