@@ -1,0 +1,89 @@
+# 1. Accedi al tuo account Azure
+az login  # Effettua il login al tuo account Microsoft Azure.
+
+# 2. Visualizza il tuo account e le informazioni sull'abbonamento attivo
+az account show  # Mostra le informazioni sull'abbonamento Azure corrente.
+
+# 3. Verifica lo stato delle risorse di sicurezza (Azure Security Center)
+az security policy list  # Mostra le politiche di sicurezza attualmente configurate nel tuo ambiente Azure.
+
+# 4. Esegui una valutazione della sicurezza delle risorse
+az security assessment list --resource-group nome_gruppo  # Elenca tutte le valutazioni di sicurezza per un gruppo di risorse.
+
+# 5. Abilita la protezione avanzata di Azure Defender per la sicurezza delle risorse
+az security pricing create --name "Standard"  # Abilita il piano di protezione avanzata di Azure Defender per tutte le risorse.
+
+# 6. Configura il monitoraggio delle minacce con Azure Sentinel
+az security alert list  # Mostra gli avvisi di sicurezza generati da Azure Sentinel.
+
+# 7. Visualizza gli avvisi di sicurezza e gli incidenti in Azure Security Center
+az security alert list --alert-type "SecurityIncident"  # Mostra gli incidenti di sicurezza e gli avvisi nel tuo Security Center.
+
+# 8. Abilita il monitoraggio della conformità alle politiche di sicurezza
+az policy state list  # Mostra lo stato delle politiche di sicurezza e di conformità in Azure.
+
+# 9. Configura il monitoraggio delle risorse con Azure Monitor
+az monitor log-analytics workspace create --resource-group nome_gruppo --workspace-name nome_workspace  # Crea uno spazio di lavoro Log Analytics per monitorare i log di sicurezza delle risorse.
+
+# 10. Proteggi le risorse da attacchi DDoS (Distributed Denial of Service)
+az network ddos-protection standard enable --resource-group nome_gruppo --name nome_ddos  # Abilita la protezione DDoS per una rete virtuale.
+
+# 11. Gestisci i certificati di sicurezza in Azure Key Vault
+az keyvault secret set --vault-name nome_vault --name nome_certificato --value "valore_certificato"  # Aggiungi o aggiorna un certificato nel Key Vault.
+
+# 12. Visualizza i certificati nel Key Vault
+az keyvault secret list --vault-name nome_vault  # Elenca tutti i certificati e i segreti nel Key Vault.
+
+# 13. Imposta la protezione delle credenziali con Azure Active Directory (Azure AD)
+az ad mfa enable --user "user_email"  # Abilita l'autenticazione multi-fattore (MFA) per un utente di Azure Active Directory.
+
+# 14. Crea un ruolo personalizzato in Azure AD per il controllo degli accessi
+az role definition create --role-name "CustomRole" --permissions "action=Microsoft.Resources/subscriptions/read"  # Crea un ruolo personalizzato in Azure AD con permessi di lettura.
+
+# 15. Assegna un ruolo a un utente o gruppo in Azure AD
+az role assignment create --assignee "user_email" --role "Contributor" --resource-group nome_gruppo  # Assegna un ruolo di "Contributor" a un utente su un gruppo di risorse.
+
+# 16. Verifica gli accessi alle risorse tramite Azure AD
+az ad signed-in-user show  # Mostra i dettagli dell'utente attualmente connesso in Azure Active Directory.
+
+# 17. Visualizza e gestisci i log di accesso in Azure AD
+az ad sign-ins list  # Mostra i log di accesso di Azure Active Directory per monitorare attività sospette.
+
+# 18. Abilita il controllo delle modifiche e il monitoraggio delle risorse in Azure
+az monitor activity-log list --resource-group nome_gruppo  # Mostra il registro delle attività per un gruppo di risorse.
+
+# 19. Configura una rete virtuale (VPC) per la protezione delle risorse
+az network vnet create --resource-group nome_gruppo --name nome_vnet --address-prefix "10.0.0.0/16"  # Crea una rete virtuale in Azure per proteggere le risorse interne.
+
+# 20. Crea una subnet sicura all'interno di una rete virtuale
+az network vnet subnet create --resource-group nome_gruppo --vnet-name nome_vnet --name nome_subnet --address-prefix "10.0.0.0/24"  # Crea una subnet sicura all'interno della rete virtuale.
+
+# 21. Configura il firewall per proteggere la rete virtuale
+az network firewall policy rule-set add --policy-name nome_policy --rule-set-name nome_rule_set --rule-name nome_rule  # Aggiunge una regola di firewall alla politica di rete.
+
+# 22. Verifica le configurazioni di sicurezza dei dischi e delle VM
+az vm show --name nome_vm --resource-group nome_gruppo  # Mostra la configurazione di sicurezza di una macchina virtuale.
+
+# 23. Abilita la gestione delle patch per le macchine virtuali in Azure
+az vm update --name nome_vm --resource-group nome_gruppo --set osProfile.windowsConfiguration.enableAutomaticUpdates=true  # Abilita l'aggiornamento automatico delle macchine virtuali.
+
+# 24. Proteggi le risorse con Azure Firewall
+az network firewall create --resource-group nome_gruppo --name nome_firewall  # Crea un'istanza di Azure Firewall per proteggere la rete virtuale.
+
+# 25. Abilita la protezione contro gli attacchi Ransomware con Azure Defender
+az security settings update --name "Defender" --enabled true  # Abilita la protezione avanzata contro i ransomware su Azure Defender.
+
+# 26. Configura il controllo degli accessi tramite identità gestite (Managed Identity)
+az identity create --name nome_identity --resource-group nome_gruppo  # Crea un'identità gestita per una risorsa in Azure.
+
+# 27. Visualizza e gestisci gli accessi tramite RBAC (Role-Based Access Control)
+az role assignment list --assignee "user_email"  # Elenca tutti i ruoli assegnati a un utente o gruppo.
+
+# 28. Proteggi le risorse da accessi non autorizzati con Azure Bastion
+az network bastion create --name nome_bastion --resource-group nome_gruppo --vnet-name nome_vnet --public-ip-address nome_ip  # Crea un'istanza di Azure Bastion per accedere in modo sicuro alle VM.
+
+# 29. Crea un log di audit per monitorare le attività del sistema
+az monitor diagnostic-settings create --name nome_log --resource-group nome_gruppo --resource nome_risorsa --logs "AuditLogs"  # Crea una configurazione di log diagnostico per una risorsa.
+
+# 30. Implementa un Web Application Firewall (WAF) per proteggere le applicazioni web
+az network application-gateway waf-policy rule-set update --policy-name nome_policy --rule-set "OWASP"  # Aggiungi o aggiorna le regole di sicurezza WAF per un'applicazione web.
