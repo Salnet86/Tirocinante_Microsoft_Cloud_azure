@@ -1,0 +1,70 @@
+# 1. Installazione e importazione di Azure PowerShell
+# Installa il modulo Az (se non già installato)
+Install-Module -Name Az -AllowClobber -Force -SkipPublisherCheck
+
+# Importa il modulo Az
+Import-Module Az
+
+# Accedi al tuo account Azure
+Connect-AzAccount
+
+# 2. Creare un Gruppo di Risorse
+# Crea un gruppo di risorse nella regione specificata
+New-AzResourceGroup -Name "NomeGruppoRisorse" -Location "EastUS"
+
+# 3. Creare una Rete Virtuale e una Sottorete
+# Crea una rete virtuale con un prefisso di indirizzo
+$vnet = New-AzVirtualNetwork -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeVnet" -AddressPrefix "10.0.0.0/16"
+
+# Aggiungi una sottorete alla rete virtuale
+$subnet = Add-AzVirtualNetworkSubnetConfig -Name "NomeSottorete" -VirtualNetwork $vnet -AddressPrefix "10.0.1.0/24"
+
+# 4. Creare una Interfaccia di Rete (NIC)
+# Crea una scheda di rete (NIC) associata alla sottorete
+$nic = New-AzNetworkInterface -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -Name "NomeNIC" -SubnetId $subnet.Id
+
+# 5. Creare la Macchina Virtuale
+# Configura la macchina virtuale con il tipo di immagine, la dimensione e le credenziali
+$vmConfig = New-AzVMConfig -VMSize "Standard_DS1_v2" -ImageName "Win2019Datacenter" -Credential (Get-Credential)
+
+# Crea la macchina virtuale utilizzando la configurazione e la NIC
+$vm = New-AzVM -ResourceGroupName "NomeGruppoRisorse" -Location "EastUS" -VMName "NomeVM" -NetworkInterfaceId $nic.Id -VMSize "Standard_DS1_v2" -AvailabilitySetId $null -VMConfiguration $vmConfig
+
+# 6. (Opzionale) Aggiungere un Disco Aggiuntivo
+# Crea la configurazione di un disco vuoto
+$diskConfig = New-AzDiskConfig -AccountType "Standard_LRS" -Location "EastUS" -CreateOption Empty -DiskSizeGB 128
+
+# Crea il disco
+$disk = New-AzDisk -ResourceGroupName "NomeGruppoRisorse" -DiskName "NomeDisco" -Disk $diskConfig
+
+# Aggiungi il disco alla macchina virtuale
+Add-AzVMDataDisk -VMName "NomeVM" -ResourceGroupName "NomeGruppoRisorse" -Name "NomeDisco" -CreateOption Attach -ManagedDiskId $disk.Id -LUN 1
+
+# 7. (Opzionale) Configurare il Firewall e le Regole di Sicurezza
+# Crea una regola di sicurezza per consentire l'accesso tramite RDP (porta 3389)
+$rule = New-AzNetworkSecurityRuleConfig -Name "AllowRDP" -Protocol "Tcp" -Direction "Inbound" -Priority 100 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange 3389 -Access "Allow"
+
+# Ottieni il gruppo di sicurezza di rete (NSG)
+$nsGroup = Get-AzNetworkSecurityGroup -ResourceGroupName "NomeGruppoRisorse" -Name "NomeNSG"
+
+# Aggiungi la regola di sicurezza al gruppo di sicurezza di rete
+$nsGroup | Add-AzNetworkSecurityRuleConfig -SecurityRule $rule
+
+# Applica le modifiche al gruppo di sicurezza di rete
+Set-AzNetworkSecurityGroup -NetworkSecurityGroup $nsGroup
+
+# 8. Avviare la Macchina Virtuale
+# Avvia la macchina virtuale
+Start-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM"
+
+# 9. (Opzionale) Fermare la Macchina Virtuale
+# Ferma la macchina virtuale
+Stop-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM" -Force
+
+# 10. (Opzionale) Eliminare la Macchina Virtuale
+# Elimina la macchina virtuale e tutte le risorse associate (NIC, dischi, ecc.)
+Remove-AzVM -ResourceGroupName "NomeGruppoRisorse" -Name "NomeVM" -Force
+
+# 11. (Opzionale) Eliminare un Gruppo di Risorse
+# Elimina un gruppo di risorse e tutte le risorse al suo interno
+Remove-AzResourceGroup -Name "NomeGruppoRisorse" -Force
