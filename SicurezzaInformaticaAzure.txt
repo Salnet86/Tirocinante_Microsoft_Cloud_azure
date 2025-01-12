@@ -1,0 +1,104 @@
+# AUTENTICAZIONE E ACCESSO
+
+# Accedi al portale Azure
+az login
+
+# Mostra informazioni sull'account attivo
+az account show
+
+# Creare un'applicazione registrata per l'autenticazione sicura in Azure AD
+az ad app create --display-name "MySecurityApp" --identifier-uris "https://MySecurityApp"
+
+# Assegnare ruoli a un utente per una risorsa specifica (es. Reader per un gruppo di risorse)
+az role assignment create --assignee user@domain.com --role Reader --scope "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}"
+
+# Configurare una policy per richiedere MFA
+az policy definition create --name "Require MFA" --rules "mfa-policy.json" --mode All
+az policy assignment create --policy "Require MFA" --scope "/subscriptions/{subscriptionId}"
+
+# Protezione con Conditional Access (Azure AD Premium necessario)
+# Configurare tramite il portale o PowerShell
+
+# CONFIGURAZIONE MICROSOFT DEFENDER FOR CLOUD
+
+# Abilitare Defender per le macchine virtuali
+az security pricing create --name VirtualMachines --tier 'Standard'
+
+# Abilitare Defender per App Services
+az security pricing create --name AppServices --tier 'Standard'
+
+# Abilitare Defender per gli account di archiviazione
+az security pricing create --name StorageAccounts --tier 'Standard'
+
+# MONITORAGGIO E LOG
+
+# Abilitare i log diagnostici per una risorsa (es. VM)
+az monitor diagnostic-settings create --resource "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}" \
+  --name "EnableDiag" --logs '[{"category": "Administrative", "enabled": true}]' \
+  --metrics '[{"category": "AllMetrics", "enabled": true}]'
+
+# Creare un'istanza di Azure Sentinel per monitoraggio SIEM
+az securityinsight workspace-settings create --resource-group MyResourceGroup --workspace-name MyWorkspace \
+  --name MySentinelInstance
+
+# Creare un alert personalizzato in Sentinel
+az sentinel alert-rule create --resource-group MyResourceGroup --workspace-name MyWorkspace \
+  --name "CustomAlert" --enabled true --query "SecurityEvent | where EventID == 4625"
+
+# PROTEZIONE DELLA RETE
+
+# Creare un gruppo di sicurezza di rete (NSG)
+az network nsg create --resource-group MyResourceGroup --name MyNSG
+
+# Aggiungere una regola NSG per bloccare il traffico su una porta (es. porta SSH 22)
+az network nsg rule create --resource-group MyResourceGroup --nsg-name MyNSG \
+  --name DenySSH --priority 100 --direction Inbound --access Deny \
+  --protocol Tcp --destination-port-ranges 22
+
+# Creare un firewall Azure
+az network firewall create --name MyFirewall --resource-group MyResourceGroup --location eastus
+
+# Configurare una regola del firewall per bloccare un dominio
+az network firewall application-rule create --firewall-name MyFirewall --collection-name "BlockRuleCollection" \
+  --name "BlockMaliciousDomain" --priority 100 --action Deny --rule-name "BlockRule" --target-fqdns "malicious.example.com"
+
+# Configurare un Application Gateway con WAF (Web Application Firewall)
+az network application-gateway create --resource-group MyResourceGroup --name MyAppGateway --location eastus \
+  --sku WAF_v2 --capacity 2 --http-settings-cookie-based-affinity Enabled
+
+# GESTIONE DEI SEGRETI
+
+# Creare un Key Vault per la gestione sicura di chiavi e segreti
+az keyvault create --name MyKeyVault --resource-group MyResourceGroup --location eastus
+
+# Aggiungere un segreto
+az keyvault secret set --vault-name MyKeyVault --name "MySecretName" --value "MySecretValue"
+
+# Aggiungere una chiave
+az keyvault key create --vault-name MyKeyVault --name "MyKey" --protection software
+
+# Proteggere l'accesso a Key Vault con policy
+az keyvault set-policy --name MyKeyVault --upn user@domain.com --secret-permissions get list set delete
+
+# PROTEZIONE DEI DATI
+
+# Configurare backup di Azure per una VM
+az backup vault create --resource-group MyResourceGroup --name MyBackupVault --location eastus
+az backup policy create --vault-name MyBackupVault --name DailyBackupPolicy --policy "{JSON policy file}"
+az backup protection enable-for-vm --vault-name MyBackupVault --vm MyVM --policy-name DailyBackupPolicy
+
+# Abilitare la crittografia automatica dei dati per un account di archiviazione
+az storage account encryption-scope update --name MyStorageAccount --resource-group MyResourceGroup --default-scope MyScope
+
+# ABILITARE IDENTITÀ GESTITE
+
+# Abilitare Managed Identity su una macchina virtuale
+az vm identity assign --name MyVM --resource-group MyResourceGroup
+
+# Configurare Managed Identity per accedere a Key Vault
+az keyvault set-policy --name MyKeyVault --spn <ManagedIdentityID> --secret-permissions get list
+
+# AGGIORNAMENTI AUTOMATICI
+
+# Configurare aggiornamenti automatici per una VM
+az vm update --resource-group MyResourceGroup --name MyVM --set osProfile.windowsConfiguration.enableAutomaticUpdates=true
