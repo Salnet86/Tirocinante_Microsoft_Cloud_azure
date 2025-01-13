@@ -1,0 +1,101 @@
+
+# 1. Accedere a MySQL come root
+mysql -u root -p                     # Accede a MySQL come utente root. Ti verrà chiesta la password.
+
+# 2. Accedere a MySQL come un altro utente
+mysql -u nome_utente -p               # Accede a MySQL come utente specificato.
+
+# 3. Uscire dalla sessione MySQL
+exit                                  # Esci dal client MySQL.
+
+# 4. Mostrare tutte le informazioni di sistema
+status                                # Mostra informazioni sul server MySQL, come la versione e lo stato.
+
+# 5. Visualizzare tutti i database
+SHOW DATABASES;                       # Mostra tutti i database presenti nel server MySQL.
+
+# 6. Selezionare un database da utilizzare
+USE nome_database;                    # Seleziona un database da utilizzare.
+
+# 7. Creare un nuovo database
+CREATE DATABASE nome_database;        # Crea un nuovo database con il nome specificato.
+
+# 8. Eliminare un database
+DROP DATABASE nome_database;          # Rimuove un database dal server MySQL.
+
+# 9. Visualizzare le informazioni di un database
+SHOW TABLES;                          # Mostra tutte le tabelle nel database selezionato.
+
+# 10. Mostrare la struttura di una tabella
+DESCRIBE nome_tabella;                # Mostra la struttura di una tabella (colonne e tipi di dati).
+
+# 11. Verifica la connessione al database
+SELECT DATABASE();                    # Mostra il database attualmente selezionato.
+
+# 12. Creare una nuova tabella
+CREATE TABLE nome_tabella (           # Crea una tabella con i campi specificati.
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100),
+  email VARCHAR(100)
+);
+
+# 13. Eliminare una tabella
+DROP TABLE nome_tabella;              # Rimuove una tabella dal database.
+
+# 14. Modificare una tabella esistente
+ALTER TABLE nome_tabella ADD COLUMN nuova_colonna VARCHAR(100);  # Aggiungi una nuova colonna alla tabella.
+
+ALTER TABLE nome_tabella MODIFY COLUMN colonna_esistente INT;  # Modifica il tipo di una colonna esistente.
+
+# 15. Rinominare una tabella
+RENAME TABLE nome_tabella TO nuovo_nome_tabella;  # Rinomina una tabella.
+
+# 16. Mostrare la struttura di una tabella
+DESCRIBE nome_tabella;                # Mostra le colonne della tabella e i relativi tipi di dati.
+
+# 17. Visualizzare la definizione di una tabella
+SHOW CREATE TABLE nome_tabella;       # Mostra la definizione completa della tabella, compreso il comando `CREATE`.
+
+# 18. Inserire dati in una tabella
+INSERT INTO nome_tabella (nome, email) VALUES ('Mario Rossi', 'mario@esempio.com');  # Aggiunge una riga alla tabella.
+
+# 19. Aggiornare i dati esistenti in una tabella
+UPDATE nome_tabella SET email = 'nuovo_email@esempio.com' WHERE id = 1;  # Aggiorna un record specifico.
+
+# 20. Eliminare dati da una tabella
+DELETE FROM nome_tabella WHERE id = 1;   # Elimina un record specifico dalla tabella.
+
+# 21. Selezionare dati da una tabella
+SELECT * FROM nome_tabella;              # Mostra tutti i record di una tabella.
+
+SELECT nome, email FROM nome_tabella;     # Seleziona solo alcune colonne della tabella.
+
+SELECT * FROM nome_tabella WHERE id = 1;  # Seleziona un record specifico.
+
+# 22. Creare un nuovo utente
+CREATE USER 'nome_utente'@'localhost' IDENTIFIED BY 'password';   # Crea un nuovo utente.
+
+# 23. Assegnare permessi a un utente
+GRANT ALL PRIVILEGES ON nome_database.* TO 'nome_utente'@'localhost';  # Assegna tutti i permessi su un database.
+
+GRANT SELECT, INSERT ON nome_database.nome_tabella TO 'nome_utente'@'localhost';  # Assegna permessi specifici a una tabella.
+
+# 24. Revocare permessi a un utente
+REVOKE ALL PRIVILEGES ON nome_database.* FROM 'nome_utente'@'localhost';  # Rimuove tutti i permessi.
+
+REVOKE SELECT, INSERT ON nome_database.nome_tabella FROM 'nome_utente'@'localhost';  # Rimuove permessi specifici.
+
+# 25. Visualizzare gli utenti e i permessi
+SHOW GRANTS FOR 'nome_utente'@'localhost';   # Mostra i permessi assegnati a un utente.
+
+# 26. Modificare la password di un utente
+SET PASSWORD FOR 'nome_utente'@'localhost' = PASSWORD('nuova_password');   # Cambia la password di un utente.
+
+# 27. Eliminare un utente
+DROP USER 'nome_utente'@'localhost';         # Rimuove un utente dal sistema.
+
+# 28. Fare un backup di un database
+mysqldump -u root -p nome_database > backup.sql;  # Esegue il dump di un database in un file SQL.
+
+# 29. Ripristinare un database da un file di backup
+mysql -u root -p nome_database < backup.sql;  # Ripristina un database da un file SQL.
