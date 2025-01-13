@@ -1,0 +1,74 @@
+
+# 1. Creare un nuovo utente
+sudo useradd nome_utente                # Crea un nuovo utente con il nome specificato.
+sudo useradd -m nome_utente             # Crea un nuovo utente e la sua home directory.
+
+# 2. Creare un nuovo gruppo
+sudo groupadd nome_gruppo               # Crea un nuovo gruppo con il nome specificato.
+
+# 3. Aggiungere un utente a un gruppo
+sudo usermod -aG nome_gruppo nome_utente   # Aggiunge l'utente a un gruppo esistente (senza rimuoverlo da altri gruppi).
+
+# 4. Cambiare il gruppo principale di un utente
+sudo usermod -g nome_gruppo nome_utente    # Cambia il gruppo principale di un utente.
+
+# 5. Cambiare la password di un utente
+sudo passwd nome_utente                # Modifica la password di un utente.
+
+# 6. Bloccare un utente (disabilitare il login)
+sudo usermod -L nome_utente             # Blocca un utente (impedisce il login).
+
+# 7. Sbloccare un utente (abilitare il login)
+sudo usermod -U nome_utente             # Sblocca un utente (riabilita il login).
+
+# 8. Eliminare un utente
+sudo userdel nome_utente                # Rimuove un utente (senza cancellare la sua home directory).
+sudo userdel -r nome_utente             # Rimuove un utente e la sua home directory.
+
+# 9. Eliminare un gruppo
+sudo groupdel nome_gruppo               # Rimuove un gruppo (non rimuove gli utenti che appartengono a quel gruppo).
+
+# 10. Modificare le informazioni di un utente
+sudo usermod -c "Nuovo commento" nome_utente   # Modifica il commento (campo GECOS) di un utente.
+
+# 11. Cambiare la shell di login di un utente
+sudo usermod -s /bin/bash nome_utente   # Cambia la shell di login di un utente.
+
+# 12. Cambiare la home directory di un utente
+sudo usermod -d /nuova_home nome_utente  # Cambia la home directory di un utente.
+
+# 13. Visualizzare i gruppi di un utente
+groups nome_utente                      # Mostra i gruppi a cui appartiene un utente.
+
+# 14. Visualizzare gli utenti di un gruppo
+grep nome_gruppo /etc/group             # Mostra gli utenti che appartengono a un gruppo.
+
+# 15. Aggiungere un gruppo al sistema
+sudo groupadd -g ID nome_gruppo         # Crea un gruppo con un ID specificato.
+
+# 16. Modificare un gruppo
+sudo groupmod -n nuovo_nome nome_gruppo  # Rinomina un gruppo.
+
+# 17. Verificare le informazioni su un utente
+id nome_utente                          # Mostra l'ID utente (UID), ID gruppo (GID) e gruppi di appartenenza.
+
+# 18. Visualizzare tutte le informazioni sugli utenti
+cat /etc/passwd                         # Mostra tutte le informazioni sugli utenti del sistema (file passwd).
+
+# 19. Visualizzare tutte le informazioni sui gruppi
+cat /etc/group                          # Mostra tutte le informazioni sui gruppi del sistema (file group).
+
+# 20. Aggiungere un utente a più gruppi
+sudo usermod -aG gruppo1,gruppo2 nome_utente   # Aggiunge l'utente a più gruppi.
+
+# 21. Cambiare l'UID di un utente
+sudo usermod -u nuovo_uid nome_utente   # Cambia l'UID di un utente.
+
+# 22. Cambiare il GID di un gruppo
+sudo groupmod -g nuovo_gid nome_gruppo  # Cambia il GID di un gruppo.
+
+# 23. Impostare un utente per l'accesso temporaneo
+sudo usermod -e 2025-12-31 nome_utente  # Imposta una data di scadenza per un account utente.
+
+# 24. Modificare i limiti di login di un utente
+sudo usermod -L nome_utente             # Limita il numero massimo di accessi contemporanei per un utente.
