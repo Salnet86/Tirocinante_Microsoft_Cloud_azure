@@ -1,0 +1,89 @@
+
+# 1. Visualizzare i permessi di un file o di una directory
+ls -l nome_file                # Mostra i permessi di un file o directory.
+ls -ld nome_directory          # Mostra i permessi di una directory.
+stat nome_file                 # Mostra informazioni dettagliate sul file, inclusi i permessi.
+
+# 2. Cambiare i permessi di un file o directory
+chmod 755 nome_file            # Imposta i permessi di lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per il gruppo e gli altri utenti.
+chmod u+x nome_file            # Aggiunge il permesso di esecuzione per il proprietario del file.
+chmod g-w nome_file            # Rimuove il permesso di scrittura per il gruppo.
+chmod o+r nome_file            # Aggiunge il permesso di lettura per gli altri utenti.
+
+# 3. Cambiare il proprietario e il gruppo di un file
+chown nome_utente nome_file    # Cambia il proprietario di un file.
+chown nome_utente:nome_gruppo nome_file   # Cambia sia il proprietario che il gruppo di un file.
+chown -R nome_utente:nome_gruppo nome_directory   # Cambia ricorsivamente il proprietario e il gruppo di tutti i file in una directory.
+
+# 4. Aggiungere un permesso di esecuzione per un file
+chmod +x nome_file             # Aggiunge il permesso di esecuzione per tutti gli utenti.
+chmod u+x nome_file            # Aggiunge il permesso di esecuzione solo per il proprietario.
+chmod g+x nome_file            # Aggiunge il permesso di esecuzione solo per il gruppo.
+chmod o+x nome_file            # Aggiunge il permesso di esecuzione solo per gli altri utenti.
+
+# 5. Rimuovere i permessi di lettura, scrittura o esecuzione
+chmod -r nome_file             # Rimuove il permesso di lettura per tutti.
+chmod -w nome_file             # Rimuove il permesso di scrittura per tutti.
+chmod -x nome_file             # Rimuove il permesso di esecuzione per tutti.
+
+# 6. Impostare permessi specifici per il proprietario, gruppo e altri
+chmod u=rwx,g=rx,o=r nome_file # Imposta permessi di lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per il gruppo e lettura per altri.
+chmod 600 nome_file            # Imposta i permessi in modo che solo il proprietario possa leggere e scrivere il file (nessun permesso per il gruppo e altri).
+
+# 7. Impostare i permessi per le directory (utile per garantire l'accesso corretto alle cartelle)
+chmod 700 nome_directory       # Solo il proprietario ha permessi di lettura, scrittura ed esecuzione.
+chmod 755 nome_directory       # Il proprietario ha tutti i permessi, il gruppo e gli altri hanno solo lettura ed esecuzione.
+chmod 777 nome_directory       # Permessi completi per il proprietario, gruppo e altri (potenzialmente pericoloso, evitare di usarlo).
+
+# 8. Cambiare solo il gruppo di un file
+chgrp nome_gruppo nome_file    # Cambia solo il gruppo di un file senza modificare il proprietario.
+
+# 9. Modificare i permessi di una directory e tutti i file al suo interno (ricorsivo)
+chmod -R 755 nome_directory    # Modifica i permessi della directory e dei file al suo interno.
+chown -R nome_utente:nome_gruppo nome_directory  # Modifica il proprietario e il gruppo di una directory e dei file al suo interno.
+
+# 1. Permessi speciali: Sticky bit (solo per directory)
+chmod +t nome_directory        # Imposta il "sticky bit", che consente solo al proprietario di un file di eliminarlo in una directory.
+ls -ld nome_directory          # Verifica che il "sticky bit" sia impostato (visualizza una "t" alla fine dei permessi).
+
+# 2. Permessi speciali: Setuid (solo per file eseguibili)
+chmod u+s nome_file            # Imposta il bit Setuid su un file eseguibile. Il file verrà eseguito con i permessi del proprietario, non dell'utente che lo esegue.
+ls -l nome_file                # Verifica che il bit Setuid sia impostato (visualizza una "s" nel campo dei permessi del proprietario).
+
+# 3. Permessi speciali: Setgid (solo per file e directory)
+chmod g+s nome_file            # Imposta il bit Setgid su un file. Per i file, il bit fa sì che vengano eseguiti con i permessi del gruppo; per le directory, tutti i file creati all'interno della directory appartengono automaticamente al gruppo della directory.
+ls -l nome_file                # Verifica che il bit Setgid sia impostato (visualizza una "s" nel campo dei permessi del gruppo).
+
+# 4. Rimuovere i permessi speciali
+chmod -s nome_file             # Rimuove il bit Setuid, Setgid o sticky bit da un file o directory.
+
+# 5. Visualizzare i permessi in formato numerico
+ls -l nome_file                # Mostra i permessi in formato simbolico.
+stat nome_file                 # Mostra informazioni dettagliate in formato numerico.
+
+# 6. Verifica dei permessi di file tramite il comando `getfacl`
+getfacl nome_file              # Mostra i permessi di accesso (ACL) per un file o una directory (se configurato).
+
+
+# 1. Aggiungere permessi di accesso con ACL
+setfacl -m u:nome_utente:rwx nome_file   # Aggiungi permessi di lettura, scrittura ed esecuzione per un utente specifico.
+setfacl -m g:nome_gruppo:rx nome_file   # Aggiungi permessi di lettura ed esecuzione per un gruppo specifico.
+
+# 2. Rimuovere permessi di accesso con ACL
+setfacl -x u:nome_utente nome_file      # Rimuove i permessi per un utente specifico.
+setfacl -x g:nome_gruppo nome_file      # Rimuove i permessi per un gruppo specifico.
+
+# 3. Visualizzare le ACL di un file
+getfacl nome_file               # Mostra le ACL (Access Control List) associate a un file.
+
+# 4. Impostare i permessi di accesso per tutti gli utenti con ACL
+setfacl -m o::r nome_file         # Imposta i permessi di lettura per tutti gli utenti (other).
+setfacl -m m::rw nome_file        # Modifica i permessi per tutti gli utenti (mask).
+
+
+# 1. Abilitare il controllo accessi (SELinux)
+getenforce                     # Mostra lo stato di SELinux (Enforcing, Permissive, Disabled).
+setenforce 1                   # Imposta SELinux su modalità "Enforcing" (abilita il controllo di accesso).
+setenforce 0                   # Imposta SELinux su modalità "Permissive" (disabilita il controllo di accesso).
+
+
