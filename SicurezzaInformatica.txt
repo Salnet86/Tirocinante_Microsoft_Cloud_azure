@@ -1,0 +1,144 @@
+
+# 1. Visualizzare gli utenti del sistema
+net user                               # Mostra tutti gli utenti del sistema.
+
+# 2. Aggiungere un nuovo utente
+net user nome_utente /add              # Aggiunge un nuovo utente.
+
+# 3. Cambiare la password di un utente
+net user nome_utente nuova_password    # Cambia la password di un utente.
+
+# 4. Disabilitare un utente
+net user nome_utente /active:no        # Disabilita un utente specifico.
+
+# 5. Abilitare un utente
+net user nome_utente /active:yes       # Abilita un utente specifico.
+
+# 6. Eliminare un utente
+net user nome_utente /delete          # Elimina un utente dal sistema.
+
+# 7. Visualizzare i gruppi di un utente
+net user nome_utente                  # Mostra i dettagli di un utente, inclusi i gruppi.
+
+# 8. Aggiungere un utente a un gruppo
+net localgroup nome_gruppo nome_utente /add  # Aggiunge un utente a un gruppo.
+
+# 9. Rimuovere un utente da un gruppo
+net localgroup nome_gruppo nome_utente /delete  # Rimuove un utente da un gruppo.
+
+# 10. Visualizzare le informazioni di rete
+ipconfig /all                         # Mostra le informazioni di rete dettagliate.
+
+# 11. Disabilitare un'interfaccia di rete
+netsh interface set interface "NomeInterfaccia" disable  # Disabilita una connessione di rete.
+
+# 12. Abilitare un'interfaccia di rete
+netsh interface set interface "NomeInterfaccia" enable   # Abilita una connessione di rete.
+
+# 13. Visualizzare la configurazione di rete avanzata
+netstat -an                            # Mostra tutte le connessioni di rete attive e le porte in ascolto.
+
+# 14. Pingerare un host remoto
+ping nome_host                         # Controlla la connettività verso un host remoto.
+
+# 15. Visualizzare il routing di rete
+route print                            # Visualizza la tabella di routing di rete.
+
+# 16. Disabilitare il firewall di Windows (non raccomandato)
+netsh advfirewall set allprofiles state off  # Disabilita il firewall di Windows.
+
+# 17. Abilitare il firewall di Windows
+netsh advfirewall set allprofiles state on   # Abilita il firewall di Windows.
+
+# 18. Visualizzare i processi in esecuzione
+tasklist                               # Mostra una lista di tutti i processi in esecuzione.
+
+# 19. Terminate un processo specifico
+taskkill /PID PID_del_processo /F       # Termina un processo specifico dato il suo PID.
+
+# 20. Visualizzare i servizi in esecuzione
+services.msc                           # Apre la finestra di gestione dei servizi di Windows.
+
+# 21. Arrestare un servizio
+net stop nome_servizio                  # Arresta un servizio specifico.
+
+# 22. Avviare un servizio
+net start nome_servizio                 # Avvia un servizio specifico.
+
+# 23. Visualizzare le connessioni di rete attive
+netstat -ano                            # Mostra tutte le connessioni di rete e i relativi PID.
+
+# 24. Monitorare il traffico di rete in tempo reale (PowerShell)
+Get-NetTCPConnection                    # Visualizza le connessioni TCP attive in tempo reale.
+
+# 25. Visualizzare i permessi di un file o cartella
+icacls "percorso\file"                  # Mostra i permessi di un file o una cartella.
+
+# 26. Modificare i permessi di un file o cartella
+icacls "percorso\file" /grant nome_utente:F   # Concede i permessi completi (Full Control) a un utente.
+
+# 27. Rimuovere i permessi di un file o cartella
+icacls "percorso\file" /remove nome_utente  # Rimuove un utente dai permessi di un file.
+
+# 28. Proteggere una cartella con la crittografia
+cipher /E "percorso\cartella"            # Cifra una cartella per proteggerla.
+
+# 29. Decrittografare una cartella
+cipher /D "percorso\cartella"            # Decripta una cartella.
+
+# 30. Visualizzare la lista degli utenti locali e i loro gruppi
+net localgroup                           # Mostra tutti i gruppi locali nel sistema.
+
+# 31. Aggiungere un utente al gruppo Administrators
+net localgroup Administrators nome_utente /add  # Aggiunge un utente al gruppo di amministratori.
+
+# 32. Visualizzare lo stato del firewall di Windows
+netsh advfirewall show allprofiles      # Mostra lo stato del firewall per tutti i profili.
+
+# 33. Aggiungere una regola al firewall per consentire una porta
+netsh advfirewall firewall add rule name="Permetti Porta" protocol=TCP dir=in localport=8080 action=allow   # Aggiunge una regola per consentire una porta.
+
+# 34. Rimuovere una regola del firewall
+netsh advfirewall firewall delete rule name="Permetti Porta"   # Rimuove una regola dal firewall.
+
+# 35. Configurare una regola di blocco per un'applicazione
+netsh advfirewall firewall add rule name="Blocca App" dir=in action=block program="C:\percorso\app.exe"   # Blocca un'applicazione tramite firewall.
+
+# 36. Visualizzare il registro degli eventi di sicurezza
+eventvwr.msc                            # Apre il Visualizzatore eventi di Windows per visualizzare i log di sistema e sicurezza.
+
+# 37. Visualizzare gli eventi di sicurezza tramite PowerShell
+Get-WinEvent -LogName Security          # Mostra gli eventi di sicurezza dal registro di sistema.
+
+# 38. Abilitare l'audit di accesso a file e cartelle
+auditpol /set /subcategory:"Logon/Logoff" /success:enable /failure:enable  # Abilita l'audit degli accessi.
+
+# 39. Disabilitare l'audit di accesso a file e cartelle
+auditpol /set /subcategory:"Logon/Logoff" /success:disable /failure:disable   # Disabilita l'audit degli accessi.
+
+# 40. Abilitare il controllo dell'account utente (UAC)
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 1 /f   # Abilita UAC.
+
+# 41. Disabilitare il controllo dell'account utente (UAC)
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f   # Disabilita UAC.
+
+# 42. Eseguire una scansione antivirus tramite PowerShell
+Start-MpScan -ScanType QuickScan        # Esegui una scansione veloce con Windows Defender.
+
+# 43. Eseguire una scansione antivirus completa
+Start-MpScan -ScanType FullScan         # Esegui una scansione completa con Windows Defender.
+
+# 44. Abilitare Windows Defender
+Set-MpPreference -DisableRealtimeMonitoring $false  # Abilita la protezione in tempo reale di Windows Defender.
+
+# 45. Disabilitare Windows Defender
+Set-MpPreference -DisableRealtimeMonitoring $true   # Disabilita la protezione in tempo reale di Windows Defender.
+
+# 46. Abilitare o disabilitare la protezione da Ransomware
+Set-MpPreference -EnableControlledFolderAccess Enabled  # Abilita la protezione contro il ransomware.
+Set-MpPreference -EnableControlledFolderAccess Disabled # Disabilita la protezione contro il ransomware.
+
+# 47. Gestire gli aggiornamenti di Windows
+wuauclt /detectnow                      # Forza la rilevazione di nuovi aggiornamenti di Windows.
+
+wuauclt /updatenow                       # Forza l'installazione degli aggiornamenti di Windows.
