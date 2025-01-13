@@ -1,0 +1,79 @@
+
+# 1. Verifica dello stato di iptables
+sudo iptables -L                       # Mostra tutte le regole correnti di iptables.
+sudo iptables -L -n -v                  # Mostra le regole di iptables con dettagli aggiuntivi, come i byte e i pacchetti.
+sudo iptables -S                       # Mostra le regole di iptables in formato script.
+sudo iptables -t nat -L                # Visualizza le regole della tabella NAT.
+
+# 2. Aggiungere una regola per permettere l'accesso SSH
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT    # Permette il traffico SSH sulla porta 22 (TCP).
+sudo iptables -A INPUT -p tcp --dport 2222 -j ACCEPT  # Permette il traffico SSH sulla porta 2222 (TCP).
+
+# 3. Bloccare l'accesso a una porta
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP   # Blocca le connessioni sulla porta 80 (HTTP).
+sudo iptables -A INPUT -p tcp --dport 443 -j DROP  # Blocca le connessioni sulla porta 443 (HTTPS).
+
+# 4. Bloccare tutto il traffico in entrata tranne SSH
+sudo iptables -P INPUT DROP                # Blocca tutte le connessioni in entrata.
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # Permette il traffico SSH.
+
+# 5. Permettere tutto il traffico in uscita
+sudo iptables -P OUTPUT ACCEPT             # Permette tutto il traffico in uscita.
+sudo iptables -A OUTPUT -o lo -j ACCEPT    # Permette il traffico in uscita sulla loopback (localhost).
+
+# 6. Bloccare il traffico da un determinato indirizzo IP
+sudo iptables -A INPUT -s 192.168.1.100 -j DROP  # Blocca tutte le connessioni in entrata dall'indirizzo IP 192.168.1.100.
+
+# 7. Permettere il traffico da un indirizzo IP specifico
+sudo iptables -A INPUT -s 192.168.1.100 -j ACCEPT  # Permette tutte le connessioni in entrata da 192.168.1.100.
+
+# 8. Bloccare il traffico ICMP (ping)
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP  # Blocca le richieste di ping (ICMP).
+
+# 9. Impostare un limite di connessioni per proteggere da attacchi di tipo DoS
+sudo iptables -A INPUT -p tcp --dport 80 -m connlimit --connlimit-above 100 --connlimit-mask 32 -j REJECT  # Limita le connessioni sulla porta 80 a 100 al massimo per IP.
+
+# 10. Salvataggio delle regole iptables
+sudo iptables-save > /etc/iptables/rules.v4  # Salva le regole in un file in modo che vengano caricate al riavvio.
+sudo service netfilter-persistent save      # Salva le regole su sistemi Debian/Ubuntu.
+
+# 11. Caricare le regole iptables
+sudo iptables-restore < /etc/iptables/rules.v4  # Carica le regole salvate dal file.
+
+# 12. Cancellare tutte le regole di iptables
+sudo iptables -F                    # Elimina tutte le regole nella catena predefinita (INPUT, OUTPUT, FORWARD).
+sudo iptables -t nat -F              # Elimina tutte le regole della tabella NAT.
+
+# 13. Eliminare una regola specifica
+sudo iptables -D INPUT -p tcp --dport 22 -j ACCEPT  # Rimuove la regola che permette il traffico SSH sulla porta 22.
+
+# 14. Aggiungere una regola per il forwarding
+sudo iptables -A FORWARD -p tcp --dport 8080 -j ACCEPT  # Permette il traffico in ingresso sulla porta 8080 nel forwarding.
+
+# 15. Configurare la mascheratura (NAT) per la condivisione di internet
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE  # Maschera il traffico in uscita su eth0 (utile per la condivisione di una connessione internet).
+
+# 16. Abilitare il forwarding di pacchetti IP
+sudo sysctl -w net.ipv4.ip_forward=1      # Abilita l'inoltro IP temporaneamente.
+sudo nano /etc/sysctl.conf                # Aggiungi 'net.ipv4.ip_forward=1' per abilitare il forwarding permanentemente.
+
+# 17. Verifica delle statistiche di iptables
+sudo iptables -L -v                      # Mostra le regole con le statistiche relative ai pacchetti e ai byte.
+sudo iptables -t nat -L -v                # Visualizza le statistiche delle regole NAT.
+
+# 18. Bloccare connessioni con pacchetti non stabiliti
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT  # Permette solo connessioni già stabilite o correlate.
+sudo iptables -A INPUT -m state --state NEW -j DROP  # Blocca tutte le nuove connessioni non autorizzate.
+
+# 19. Limitare la velocità delle connessioni per proteggere da DoS
+sudo iptables -A INPUT -p tcp --dport 22 -m limit --limit 5/minute -j ACCEPT  # Limita le connessioni SSH a 5 al minuto.
+
+# 20. Aggiungere una regola per accettare il traffico HTTP
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT    # Permette il traffico HTTP sulla porta 80 (TCP).
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT   # Permette il traffico HTTPS sulla porta 443 (TCP).
+
+# 21. Bloccare il traffico da un'intera rete
+sudo iptables -A INPUT -s 192.168.0.0/24 -j DROP  # Blocca tutto il traffico in entrata dalla rete 192.168.0.0/24.
+
+# 22. Permettere il traffico da una rete specifica
+sudo iptables -A INPUT -s 192.168.1.0/24 -j ACCEPT  # Permette tutte le connessioni in entrata dalla rete 192.168.1.0/24.
