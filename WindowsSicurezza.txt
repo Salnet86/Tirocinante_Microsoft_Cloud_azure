@@ -1,0 +1,101 @@
+
+# 1. Visualizzare gli utenti del sistema
+net user                               # Mostra tutti gli utenti del sistema.
+
+# 2. Aggiungere un nuovo utente
+net user nome_utente /add              # Aggiunge un nuovo utente.
+
+# 3. Cambiare la password di un utente
+net user nome_utente nuova_password    # Cambia la password di un utente.
+
+# 4. Disabilitare un utente
+net user nome_utente /active:no        # Disabilita un utente specifico.
+
+# 5. Abilitare un utente
+net user nome_utente /active:yes       # Abilita un utente specifico.
+
+# 6. Eliminare un utente
+net user nome_utente /delete          # Elimina un utente dal sistema.
+
+# 7. Visualizzare i gruppi di un utente
+net user nome_utente                  # Mostra i dettagli di un utente, inclusi i gruppi.
+
+# 8. Aggiungere un utente a un gruppo
+net localgroup nome_gruppo nome_utente /add  # Aggiunge un utente a un gruppo.
+
+# 9. Rimuovere un utente da un gruppo
+net localgroup nome_gruppo nome_utente /delete  # Rimuove un utente da un gruppo.
+
+# 1. Visualizzare le informazioni di rete
+ipconfig /all                         # Mostra le informazioni di rete dettagliate.
+
+# 2. Disabilitare un'interfaccia di rete
+netsh interface set interface "NomeInterfaccia" disable  # Disabilita una connessione di rete.
+
+# 3. Abilitare un'interfaccia di rete
+netsh interface set interface "NomeInterfaccia" enable   # Abilita una connessione di rete.
+
+# 4. Visualizzare la configurazione di rete avanzata
+netstat -an                            # Mostra tutte le connessioni di rete attive e le porte in ascolto.
+
+# 5. Pingerare un host remoto
+ping nome_host                         # Controlla la connettività verso un host remoto.
+
+# 6. Visualizzare il routing di rete
+route print                            # Visualizza la tabella di routing di rete.
+
+# 7. Disabilitare il firewall di Windows (non raccomandato)
+netsh advfirewall set allprofiles state off  # Disabilita il firewall di Windows.
+
+# 8. Abilitare il firewall di Windows
+netsh advfirewall set allprofiles state on   # Abilita il firewall di Windows.
+
+# 1. Visualizzare i processi in esecuzione
+tasklist                               # Mostra una lista di tutti i processi in esecuzione.
+
+# 2. Terminate un processo specifico
+taskkill /PID PID_del_processo /F       # Termina un processo specifico dato il suo PID.
+
+# 3. Visualizzare i servizi in esecuzione
+services.msc                           # Apre la finestra di gestione dei servizi di Windows.
+
+# 4. Arrestare un servizio
+net stop nome_servizio                  # Arresta un servizio specifico.
+
+# 5. Avviare un servizio
+net start nome_servizio                 # Avvia un servizio specifico.
+
+# 6. Visualizzare le connessioni di rete attive
+netstat -ano                            # Mostra tutte le connessioni di rete e i relativi PID.
+
+# 7. Monitorare il traffico di rete in tempo reale (PowerShell)
+Get-NetTCPConnection                    # Visualizza le connessioni TCP attive in tempo reale.
+
+# 1. Visualizzare i permessi di un file o cartella
+icacls "percorso\file"                  # Mostra i permessi di un file o una cartella.
+
+# 2. Modificare i permessi di un file o cartella
+icacls "percorso\file" /grant nome_utente:F   # Concede i permessi completi (Full Control) a un utente.
+
+# 3. Rimuovere i permessi di un file o cartella
+icacls "percorso\file" /remove nome_utente  # Rimuove un utente dai permessi di un file.
+
+# 4. Proteggere una cartella con la crittografia
+cipher /E "percorso\cartella"            # Cifra una cartella per proteggerla.
+
+# 5. Decrittografare una cartella
+cipher /D "percorso\cartella"            # Decripta una cartella.
+
+# 6. Visualizzare la lista degli utenti locali e i loro gruppi
+net localgroup                           # Mostra tutti i gruppi locali nel sistema.
+
+# 7. Aggiungere un utente al gruppo Administrators
+net localgroup Administrators nome_utente /add  # Aggiunge un utente al gruppo di amministratori.
+
+
+
+
+
+
+
+
