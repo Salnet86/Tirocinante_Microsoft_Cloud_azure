@@ -1,0 +1,74 @@
+# 1. Aggiornare il sistema
+sudo apt update && sudo apt upgrade -y   # Aggiorna i pacchetti di sistema per garantire che siano installate le versioni più recenti e sicure.
+
+# 2. Installare un firewall (UFW - Uncomplicated Firewall)
+sudo apt install ufw -y                  # Installa il firewall UFW.
+sudo ufw enable                          # Abilita il firewall.
+sudo ufw default deny incoming           # Blocca tutte le connessioni in entrata di default.
+sudo ufw default allow outgoing          # Permette tutte le connessioni in uscita.
+sudo ufw allow ssh                       # Permette le connessioni SSH.
+sudo ufw status                          # Verifica lo stato del firewall.
+
+# 3. Controllo delle porte aperte
+sudo netstat -tuln                       # Mostra tutte le porte aperte e i relativi servizi in ascolto.
+
+# 4. Modificare i permessi dei file
+chmod 600 nome_file                      # Imposta i permessi su un file per essere letti/scritti solo dal proprietario.
+chmod 700 nome_directory                 # Imposta i permessi di esecuzione e scrittura solo per il proprietario della directory.
+
+# 5. Proteggere l'accesso SSH
+sudo nano /etc/ssh/sshd_config           # Modifica la configurazione di SSH.
+# Impostazioni da aggiungere per aumentare la sicurezza:
+# PermitRootLogin no
+# PasswordAuthentication no
+# Port 2222
+sudo systemctl restart ssh               # Riavvia il servizio SSH per applicare le modifiche.
+
+# 6. Usare Fail2Ban per prevenire attacchi brute-force
+sudo apt install fail2ban -y             # Installa Fail2Ban.
+sudo systemctl enable fail2ban          # Abilita Fail2Ban all'avvio.
+sudo systemctl start fail2ban           # Avvia il servizio Fail2Ban.
+sudo fail2ban-client status             # Mostra lo stato di Fail2Ban.
+
+# 7. Proteggere il sistema con AppArmor
+sudo apt install apparmor apparmor-utils -y  # Installa AppArmor.
+sudo systemctl enable apparmor          # Abilita AppArmor all'avvio.
+sudo systemctl start apparmor           # Avvia il servizio AppArmor.
+sudo aa-status                          # Verifica lo stato di AppArmor.
+
+# 8. Utilizzare SELinux per una maggiore sicurezza
+# SELinux non è predefinito su tutte le distribuzioni. Per installarlo:
+sudo apt install selinux-utils selinux-policy-default -y  # Installa i pacchetti SELinux.
+sudo selinuxenabled                     # Verifica se SELinux è attivo.
+getenforce                              # Controlla lo stato di SELinux (Enforcing, Permissive, Disabled).
+
+# 9. Controllo delle cronologie dei comandi
+history                                  # Mostra la cronologia dei comandi eseguiti.
+sudo cat /var/log/auth.log | grep "sudo" # Esamina i log per attività sospette o comandi sudo.
+
+# 10. Monitorare i processi in esecuzione
+top                                      # Mostra i processi in esecuzione e utilizza la memoria.
+ps aux                                   # Mostra una lista dettagliata di tutti i processi attivi.
+
+# 11. Verifica della configurazione dei permessi delle directory
+ls -ld /percorso/directory               # Mostra i permessi e la proprietà di una directory.
+ls -l /percorso/directory/*             # Mostra i permessi e la proprietà dei file all'interno di una directory.
+
+# 12. Verifica della sicurezza dei pacchetti installati
+dpkg -l | grep -i "package_name"        # Cerca un pacchetto specifico tra quelli installati.
+sudo apt install lynis -y               # Installa Lynis, uno strumento di auditing di sicurezza.
+sudo lynis audit system                 # Esegui una scansione di sicurezza completa del sistema.
+
+# 13. Disabilitare l'accesso SSH per un utente specifico
+sudo usermod -L nome_utente             # Blocca l'account di un utente (disabilita l'accesso SSH).
+
+# 14. Disabilitare servizi non necessari
+sudo systemctl list-units --type=service --state=running  # Mostra tutti i servizi attivi.
+sudo systemctl stop nome_servizio       # Ferma un servizio attivo non necessario.
+sudo systemctl disable nome_servizio    # Disabilita un servizio per non avviarlo al boot.
+
+# 15. Impostare un limite di tentativi di login
+sudo nano /etc/security/limits.conf      # Modifica il file di configurazione dei limiti.
+# Aggiungi:
+# *               hard    maxlogins      5
+# *               hard    maxsyslogins   2
