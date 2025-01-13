@@ -1,0 +1,132 @@
+
+# 1. Verificare la configurazione del firewall di Windows
+Get-NetFirewallProfile                 # Mostra lo stato dei profili di firewall di Windows.
+
+# 2. Abilitare il firewall di Windows
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True  # Abilita il firewall per tutti i profili.
+
+# 3. Disabilitare il firewall di Windows
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled False  # Disabilita il firewall per tutti i profili.
+
+# 4. Aggiungere una regola al firewall per consentire una porta
+New-NetFirewallRule -DisplayName "Allow TCP Port 8080" -Protocol TCP -LocalPort 8080 -Action Allow  # Aggiunge una regola per consentire il traffico sulla porta 8080.
+
+# 5. Aggiungere una regola per bloccare un'applicazione
+New-NetFirewallRule -DisplayName "Block Application" -Program "C:\Path\To\App.exe" -Action Block  # Blocca un'applicazione tramite il firewall.
+
+# 6. Visualizzare le connessioni TCP attive
+Get-NetTCPConnection                    # Mostra tutte le connessioni TCP attive sul sistema.
+
+# 7. Visualizzare le connessioni di rete attive con informazioni sui processi
+Get-NetTCPConnection | Select-Object LocalAddress, LocalPort, RemoteAddress, RemotePort, State, OwningProcess  # Visualizza informazioni dettagliate sulle connessioni di rete.
+
+# 8. Disabilitare la protezione in tempo reale di Windows Defender
+Set-MpPreference -DisableRealtimeMonitoring $true  # Disabilita la protezione in tempo reale di Windows Defender.
+
+# 9. Abilitare la protezione in tempo reale di Windows Defender
+Set-MpPreference -DisableRealtimeMonitoring $false  # Abilita la protezione in tempo reale di Windows Defender.
+
+# 10. Avviare una scansione rapida con Windows Defender
+Start-MpScan -ScanType QuickScan  # Avvia una scansione rapida per rilevare malware.
+
+# 11. Avviare una scansione completa con Windows Defender
+Start-MpScan -ScanType FullScan   # Avvia una scansione completa per rilevare malware.
+
+# 12. Visualizzare lo stato di Windows Defender
+Get-MpComputerStatus  # Mostra lo stato attuale di Windows Defender.
+
+# 13. Verificare la protezione da ransomware (Controllo cartelle protette)
+Get-MpPreference | Select-Object EnableControlledFolderAccess  # Controlla se la protezione da ransomware è abilitata.
+
+# 14. Abilitare la protezione da ransomware (Controllo cartelle protette)
+Set-MpPreference -EnableControlledFolderAccess Enabled  # Abilita la protezione contro ransomware.
+
+# 15. Disabilitare la protezione da ransomware (Controllo cartelle protette)
+Set-MpPreference -EnableControlledFolderAccess Disabled  # Disabilita la protezione contro ransomware.
+
+# 16. Verificare gli eventi di sicurezza nel registro di eventi
+Get-WinEvent -LogName Security    # Mostra gli eventi di sicurezza nel registro di eventi di Windows.
+
+# 17. Abilitare la registrazione degli accessi di logon/logoff
+auditpol /set /subcategory:"Logon/Logoff" /success:enable /failure:enable  # Abilita la registrazione degli eventi di logon/logoff.
+
+# 18. Disabilitare la registrazione degli accessi di logon/logoff
+auditpol /set /subcategory:"Logon/Logoff" /success:disable /failure:disable  # Disabilita la registrazione degli eventi di logon/logoff.
+
+# 19. Visualizzare la configurazione dell'UAC (Controllo Account Utente)
+Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | Select-Object EnableLUA  # Mostra lo stato di UAC.
+
+# 20. Abilitare UAC (Controllo Account Utente)
+Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" EnableLUA 1  # Abilita UAC.
+
+# 21. Disabilitare UAC (Controllo Account Utente)
+Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" EnableLUA 0  # Disabilita UAC.
+
+# 22. Verificare la configurazione della crittografia BitLocker
+Get-BitLockerVolume  # Mostra lo stato di BitLocker su tutti i volumi.
+
+# 23. Abilitare la crittografia BitLocker su un disco
+Enable-BitLocker -MountPoint "C:" -PasswordProtector  # Abilita BitLocker su un volume specificato.
+
+# 24. Disabilitare la crittografia BitLocker su un disco
+Disable-BitLocker -MountPoint "C:"  # Disabilita BitLocker su un volume specificato.
+
+# 25. Aggiungere un utente a un gruppo di amministratori
+Add-LocalGroupMember -Group "Administrators" -Member "nome_utente"  # Aggiunge un utente al gruppo di amministratori.
+
+# 26. Rimuovere un utente dal gruppo di amministratori
+Remove-LocalGroupMember -Group "Administrators" -Member "nome_utente"  # Rimuove un utente dal gruppo di amministratori.
+
+# 27. Creare un nuovo utente locale
+New-LocalUser "nome_utente" -Password (ConvertTo-SecureString "password" -AsPlainText -Force)  # Crea un nuovo utente locale.
+
+# 28. Eliminare un utente locale
+Remove-LocalUser -Name "nome_utente"  # Elimina un utente locale.
+
+# 29. Bloccare un account utente
+Disable-LocalUser -Name "nome_utente"  # Disabilita un utente locale.
+
+# 30. Sbloccare un account utente
+Enable-LocalUser -Name "nome_utente"  # Abilita un utente locale.
+
+# 31. Visualizzare i permessi di un file o cartella
+Get-Acl "C:\percorso\file"  # Mostra i permessi di un file o di una cartella.
+
+# 32. Modificare i permessi di un file o cartella
+Set-Acl "C:\percorso\file" -AclObject $acl  # Modifica i permessi di un file o cartella.
+
+# 33. Disabilitare l'esecuzione di script PowerShell non firmati
+Set-ExecutionPolicy RemoteSigned  # Imposta la politica di esecuzione per consentire solo script firmati.
+
+# 34. Abilitare l'esecuzione di script PowerShell non firmati
+Set-ExecutionPolicy Unrestricted  # Abilita l'esecuzione di qualsiasi script PowerShell, anche quelli non firmati.
+
+# 35. Abilitare la protezione contro exploit di sicurezza
+Set-ExecutionPolicy Bypass  # Abilita l'esecuzione di script, disabilitando la protezione contro alcuni exploit di sicurezza.
+
+# 36. Esaminare i gruppi locali di utenti
+Get-LocalGroup  # Mostra tutti i gruppi locali sul computer.
+
+# 37. Visualizzare i membri di un gruppo specifico
+Get-LocalGroupMember -Group "Administrators"  # Mostra tutti i membri del gruppo "Administrators".
+
+# 38. Monitorare gli accessi e tentativi di accesso
+Get-EventLog -LogName Security -EntryType SuccessAudit, FailureAudit  # Monitora gli eventi di accesso riusciti e falliti.
+
+# 39. Disabilitare l'account amministratore predefinito
+Disable-LocalUser -Name "Administrator"  # Disabilita l'account "Administrator" predefinito.
+
+# 40. Abilitare l'account amministratore predefinito
+Enable-LocalUser -Name "Administrator"  # Abilita l'account "Administrator" predefinito.
+
+# 41. Abilitare la protezione delle cartelle controllate (protezione contro il ransomware)
+Set-MpPreference -EnableControlledFolderAccess Enabled  # Abilita la protezione delle cartelle contro ransomware.
+
+# 42. Disabilitare la protezione delle cartelle controllate (protezione contro il ransomware)
+Set-MpPreference -EnableControlledFolderAccess Disabled  # Disabilita la protezione delle cartelle contro ransomware.
+
+# 43. Verificare lo stato delle politiche di sicurezza
+Get-SecurityPolicy  # Visualizza le politiche di sicurezza attive nel sistema.
+
+# 44. Verificare l'autenticazione a due fattori (se configurato)
+Get-LocalUser -Name "nome_utente"  # Mostra informazioni sugli utenti locali, compresa l'autenticazione a due fattori se configurata.
