@@ -1,0 +1,57 @@
+
+# Comandi di sicurezza informatica per PowerShell
+
+# Informazioni di rete
+Get-NetIPAddress                        # Elenca gli indirizzi IP configurati
+Get-NetRoute                            # Mostra le tabelle di routing
+Test-Connection -ComputerName [host]    # Testa la connessione verso un host (simile a ping)
+Resolve-DnsName [dominio]               # Risolve un dominio (simile a nslookup)
+Get-NetTCPConnection                    # Mostra le connessioni TCP attive
+Get-DnsClientCache                      # Visualizza la cache DNS
+
+# Gestione degli utenti e gruppi
+Get-LocalUser                           # Mostra gli utenti locali
+Get-LocalGroup                          # Elenca i gruppi locali
+Get-LocalGroupMember -Group "Administrators"  # Elenca i membri del gruppo Administrators
+New-LocalUser -Name [utente] -Password (ConvertTo-SecureString "password" -AsPlainText -Force) -FullName "[nome completo]" -Description "[descrizione]"  # Crea un nuovo utente locale
+
+# Politiche di sicurezza
+Get-LocalUser | Select-Object Name, Enabled, PasswordExpired   # Mostra stato e policy degli utenti locali
+Get-GPOReport -All -ReportType HTML -Path C:\GPOReport.html   # Esporta un report dei criteri di gruppo (GPO) (richiede RSAT)
+auditpol /get /category:*                                     # Mostra le politiche di audit
+
+# Processi e servizi
+Get-Process                            # Elenca i processi attivi
+Stop-Process -Id [PID] -Force          # Termina un processo specifico
+Get-Service                            # Elenca tutti i servizi
+Stop-Service -Name [servizio]          # Arresta un servizio specifico
+Start-Service -Name [servizio]         # Avvia un servizio specifico
+
+# Analisi e diagnostica del sistema
+Get-WinEvent -LogName Security         # Legge i log eventi di sicurezza
+Get-EventLog -LogName System           # Mostra i log di sistema
+Get-EventLog -LogName Application      # Mostra i log delle applicazioni
+Get-WindowsFeature                     # Elenca le funzionalità di Windows installate
+Get-ComputerInfo                       # Mostra informazioni dettagliate sul sistema
+
+# Configurazione firewall
+Get-NetFirewallProfile                 # Mostra i profili del firewall attivi
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False  # Disabilita il firewall
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True   # Abilita il firewall
+Get-NetFirewallRule                    # Elenca tutte le regole del firewall configurate
+
+# Gestione e auditing dei file
+Get-ChildItem -Path C:\ -Recurse -Force | Where-Object { $_.Attributes -match "Hidden" }  # Trova file nascosti
+Get-Acl -Path [file/percorso]                        # Mostra le autorizzazioni di un file o directory
+Set-Acl -Path [file/percorso] -AclObject (Get-Acl -Path [altro/percorso])  # Copia le autorizzazioni di un file a un altro
+
+# Sicurezza avanzata
+Get-ExecutionPolicy                      # Mostra la politica di esecuzione degli script
+Set-ExecutionPolicy RemoteSigned         # Consente di eseguire script firmati
+Enable-PSRemoting                        # Abilita la gestione remota via PowerShell
+Get-MpPreference                         # Visualizza le preferenze di Windows Defender
+Start-MpScan -ScanType FullScan          # Avvia una scansione completa con Windows Defender
+
+# Test e verifica della sicurezza
+Test-WSMan -ComputerName [host]          # Verifica se WinRM è abilitato su un host remoto
+Invoke-Command -ComputerName [host] -ScriptBlock { comando }  # Esegue comandi su un host remoto

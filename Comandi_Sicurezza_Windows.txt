@@ -1,0 +1,54 @@
+
+# Comandi di sicurezza informatica per il Prompt dei Comandi di Windows
+
+# Informazioni di rete
+ipconfig /all                  # Visualizza la configurazione completa della rete
+ipconfig /flushdns             # Pulisce la cache del DNS
+arp -a                         # Mostra la tabella ARP
+netstat -ano                   # Visualizza tutte le connessioni di rete attive con i PID
+tracert [indirizzo]            # Traccia il percorso verso un host
+nslookup [dominio]             # Risoluzione DNS per un dominio specifico
+
+# Controllo delle condivisioni di rete
+net share                      # Mostra le condivisioni attive
+net view \[computer]          # Visualizza le condivisioni su un computer remoto
+net use                        # Mostra i collegamenti attivi alle condivisioni
+
+# Gestione degli utenti
+net user                       # Mostra tutti gli utenti del sistema
+net user [nomeutente]          # Visualizza i dettagli di un utente specifico
+net localgroup                 # Mostra i gruppi locali
+net localgroup Administrators  # Mostra gli utenti del gruppo Administrators
+net accounts                   # Mostra le politiche sugli account utente
+
+# Analisi e gestione delle policy di sicurezza
+gpresult /r                    # Mostra i criteri di gruppo applicati all'utente e al computer
+secedit /analyze /cfg [file]   # Analizza le impostazioni di sicurezza
+auditpol /get /category:*      # Visualizza le politiche di audit configurate
+
+# Monitoraggio e auditing
+whoami                         # Mostra il nome utente corrente
+whoami /priv                   # Mostra i privilegi dell'utente corrente
+whoami /groups                 # Mostra i gruppi di cui fa parte l'utente
+tasklist                       # Elenca tutti i processi in esecuzione
+tasklist /svc                  # Elenca i processi e i servizi associati
+taskkill /PID [pid] /F         # Termina un processo specifico
+
+# Verifica e riparazione del sistema
+sfc /scannow                   # Esegue la verifica dei file di sistema
+chkdsk /f                      # Controlla e ripara il file system
+systeminfo                     # Mostra informazioni dettagliate sul sistema
+
+# Configurazione firewall
+netsh advfirewall show allprofiles  # Mostra le impostazioni del firewall per tutti i profili
+netsh advfirewall set allprofiles state off  # Disabilita il firewall (solo amministratori)
+netsh advfirewall set allprofiles state on   # Abilita il firewall (solo amministratori)
+
+# Log e diagnostica eventi
+wevtutil qe Security /f:text   # Visualizza i log di sicurezza
+wevtutil el                    # Elenca tutti i registri eventi disponibili
+
+# Test e verifica
+ping [indirizzo]               # Testa la connettività verso un host
+telnet [indirizzo] [porta]     # Verifica la connettività su una porta specifica (richiede Telnet Client)
+powershell                     # Avvia PowerShell per comandi avanzati

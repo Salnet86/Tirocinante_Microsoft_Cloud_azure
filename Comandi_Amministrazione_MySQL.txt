@@ -1,0 +1,52 @@
+
+# Comandi di amministrazione per MySQL
+
+# Connessione al server MySQL
+mysql -u [utente] -p                           # Connessione al server MySQL con password richiesta
+mysql -u [utente] -p[password]                 # Connessione al server MySQL con password inclusa (meno sicuro)
+
+# Gestione dei database
+SHOW DATABASES;                                # Mostra tutti i database
+CREATE DATABASE [nome_database];               # Crea un nuovo database
+DROP DATABASE [nome_database];                 # Elimina un database
+USE [nome_database];                           # Seleziona un database da utilizzare
+
+# Gestione delle tabelle
+SHOW TABLES;                                   # Mostra tutte le tabelle nel database selezionato
+DESCRIBE [nome_tabella];                       # Mostra la struttura di una tabella
+CREATE TABLE [nome_tabella] ([colonne]);       # Crea una nuova tabella
+ALTER TABLE [nome_tabella] ADD [colonna] [tipo];  # Aggiunge una nuova colonna a una tabella
+DROP TABLE [nome_tabella];                     # Elimina una tabella
+
+# Operazioni sui dati
+INSERT INTO [nome_tabella] ([colonne]) VALUES ([valori]);  # Inserisce un record
+SELECT * FROM [nome_tabella];                              # Seleziona tutti i record di una tabella
+UPDATE [nome_tabella] SET [colonna]=[valore] WHERE [condizione];  # Aggiorna i record di una tabella
+DELETE FROM [nome_tabella] WHERE [condizione];            # Elimina i record in base a una condizione
+
+# Gestione degli utenti
+CREATE USER '[utente]'@'[host]' IDENTIFIED BY '[password]'; # Crea un nuovo utente
+DROP USER '[utente]'@'[host]';                             # Elimina un utente
+GRANT ALL PRIVILEGES ON [database].* TO '[utente]'@'[host]'; # Concede privilegi a un utente
+REVOKE ALL PRIVILEGES ON [database].* FROM '[utente]'@'[host]'; # Revoca i privilegi di un utente
+FLUSH PRIVILEGES;                                         # Applica le modifiche ai privilegi
+
+# Backup e ripristino
+mysqldump -u [utente] -p [database] > backup.sql          # Effettua il backup di un database
+mysql -u [utente] -p [database] < backup.sql              # Ripristina un database da un file di backup
+
+# Informazioni e diagnostica
+SHOW STATUS;                                              # Mostra lo stato del server
+SHOW VARIABLES;                                           # Mostra le variabili di configurazione
+SHOW PROCESSLIST;                                         # Mostra i processi attivi
+SHOW GRANTS FOR '[utente]'@'[host]';                      # Mostra i privilegi di un utente
+SHOW ENGINE INNODB STATUS;                                # Mostra lo stato di InnoDB
+
+# Configurazioni avanzate
+SET GLOBAL max_connections = [valore];                   # Imposta il numero massimo di connessioni al server
+RESET QUERY CACHE;                                        # Svuota la cache delle query
+OPTIMIZE TABLE [nome_tabella];                           # Ottimizza una tabella
+
+# Sicurezza
+ALTER USER '[utente]'@'[host]' IDENTIFIED BY '[nuova_password]';  # Cambia la password di un utente
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM '[utente]'@'[host]';     # Revoca tutti i privilegi di un utente

@@ -1,0 +1,58 @@
+1. ls - Elenca il contenuto di una directory
+2. cd - Cambia directory
+3. pwd - Stampa la directory corrente
+4. mkdir - Crea una nuova directory
+5. rmdir - Rimuove una directory vuota
+6. rm - Rimuove file o directory
+7. touch - Modifica i timestamp di un file o crea un file vuoto
+8. cp - Copia file e directory
+9. mv - Muove o rinomina file e directory
+10. cat - Concatena e visualizza file
+11. more - Visualizza il contenuto di un file con paginazione
+12. less - Visualizza il contenuto di un file con navigazione indietro
+13. head - Visualizza le prime linee di un file
+14. tail - Visualizza le ultime linee di un file
+15. find - Cerca file in una gerarchia di directory
+16. grep - Filtra e stampa le linee che corrispondono a un pattern
+17. echo - Stampa una riga di testo
+18. man - Mostra la pagina di manuale di un comando
+19. chmod - Cambia i permessi di accesso di un file
+20. chown - Cambia il proprietario e il gruppo di un file
+21. ps - Mostra lo stato dei processi
+22. top - Visualizza i task in esecuzione sul sistema
+23. kill - Termina un processo
+24. df - Mostra lo spazio su disco disponibile
+25. du - Mostra l'utilizzo dello spazio su disco
+26. free - Mostra l'utilizzo della memoria
+27. whoami - Mostra l'utente attualmente loggato
+28. uname - Mostra informazioni sul sistema
+29. tar - Archivia file
+30. zip - Comprimi file
+31. unzip - Estrai file compressi
+32. wget - Scarica file da internet
+33. curl - Trasferisce dati da o verso un server
+34. ssh - Accede in remoto a un sistema
+35. scp - Copia file in modo sicuro
+36. sudo - Esegui un comando come altro utente (di solito root)
+37. history - Mostra la cronologia dei comandi
+38. alias - Crea un alias per un comando
+39. unalias - Rimuove un alias
+40. sed - Modifica in modo non interattivo il contenuto di un file
+41. awk - Linguaggio di elaborazione testi
+42. cut - Rimuove sezioni da ogni riga di un file
+43. sort - Ordina le righe di un file
+44. uniq - Mostra o omette le righe ripetute
+45. diff - Confronta file riga per riga
+46. wc - Conta le righe, parole e byte di un file
+47. truncate - Riduce o estende la dimensione di un file
+48. ln - Crea collegamenti simbolici o hard link
+49. jobs - Mostra i processi in background
+50. bg - Riprende un processo in background
+51. fg - Porta un processo in primo piano
+52. xargs - Costruisce ed esegue linee di comando da input standard
+53. df - Mostra lo spazio su disco disponibile
+54. mount - Monta un file system
+55. umount - Smonta un file system
+56. crontab - Programma lavori periodici
+57. systemctl - Controlla il sistema e i servizi con systemd
+58. service - Controlla i servizi di sistema
