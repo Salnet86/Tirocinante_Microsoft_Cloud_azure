@@ -107,11 +107,11 @@ SELECT * FROM NomeTabella;
 
 -- Inserimento di dati in una tabella
 INSERT INTO NomeTabella (ID, Nome, DataNascita)
-VALUES (1, 'Mario Rossi', '1980-01-01');
+VALUES (1, 'Marta', '1980-01-01');
 
 -- Aggiornamento di dati in una tabella
 UPDATE NomeTabella
-SET Nome = 'Giuseppe Verdi'
+SET Nome = 'Moranda Maria'
 WHERE ID = 1;
 
 -- Eliminazione di dati da una tabella
